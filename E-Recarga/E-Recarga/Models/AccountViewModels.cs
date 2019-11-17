@@ -76,9 +76,34 @@ namespace E_Recarga.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Confirmar Password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Nome")]
+        public string Nome { get; set; }
+
+        [Required]
+        [Display(Name = "NIF")]
+        [StringLength(9, ErrorMessage ="O NIF tem de ter 9 dígitos.", MinimumLength = 9)]
+        public string Nif { get; set; }
+
+        [Required]
+        [Display(Name = "Número do Cartão")]
+        [StringLength(16, ErrorMessage = "O Número do Cartão tem de ter 9 dígitos.", MinimumLength = 16)]
+        public string NCartaoCredito { get; set; }
+
+        [Required]
+        [Display(Name = "Titular do Cartão")]
+        public string TitularCartao { get; set; }
+
+        [Required]
+        [Display(Name = "CCV")]
+        [StringLength(3, ErrorMessage = "O CCV são os 3 dígitos atrás da parte de trás do cartão", MinimumLength = 3)]
+        public string Ccv { get; set; }
+
+
     }
 
     public class ResetPasswordViewModel

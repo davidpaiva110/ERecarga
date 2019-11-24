@@ -91,7 +91,7 @@ namespace E_Recarga.Models
 
         [Required]
         [Display(Name = "Número do Cartão")]
-        [StringLength(16, ErrorMessage = "O Número do Cartão tem de ter 9 dígitos.", MinimumLength = 16)]
+        [StringLength(16, ErrorMessage = "O Número do Cartão tem de ter 16 dígitos.", MinimumLength = 16)]
         public string NCartaoCredito { get; set; }
 
         [Required]

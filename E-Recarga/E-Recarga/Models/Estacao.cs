@@ -16,8 +16,8 @@ namespace E_Recarga.Models
         public double Preco { get; set; }
 
         [ForeignKey("RedeProprietaria")]
-        public string RedeProprietariaId { get; set; }
-        public RedeProprietaria redeProprietaria { get; set; }
+        public int RedeProprietariaId { get; set; }
+        public RedeProprietaria RedeProprietaria { get; set; }
 
         public IList<Posto> Postos { get; set; }
     }

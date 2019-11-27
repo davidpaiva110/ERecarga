@@ -15,7 +15,7 @@ namespace E_Recarga.Models
 
         [ForeignKey("Estacao")]
         public int EstacaoId { get; set; }
-        public Estacao estacao { get; set; }
+        public Estacao Estacao { get; set; }
 
         public IList<Reserva> Reservas { get; set; }
     }

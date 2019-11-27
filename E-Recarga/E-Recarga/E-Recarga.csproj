@@ -176,6 +176,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911091839079_InitialCreate.cs" />
+    <Compile Include="Migrations\201911091839079_InitialCreate.Designer.cs">
+      <DependentUpon>201911091839079_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911270147137_ModeloInicial.cs" />
+    <Compile Include="Migrations\201911270147137_ModeloInicial.Designer.cs">
+      <DependentUpon>201911270147137_ModeloInicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Estacao.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -183,6 +192,7 @@
     <Compile Include="Models\Posto.cs" />
     <Compile Include="Models\RedeProprietaria.cs" />
     <Compile Include="Models\Reserva.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -306,6 +316,12 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201911091839079_InitialCreate.resx">
+      <DependentUpon>201911091839079_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911270147137_ModeloInicial.resx">
+      <DependentUpon>201911270147137_ModeloInicial.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -16,10 +16,10 @@ namespace E_Recarga.Models
 
         [ForeignKey("Posto")]
         public int PostoId { get; set; }
-        public Posto posto { get; set; }
+        public Posto Posto { get; set; }
 
         [ForeignKey("User")]
-        public string UserId { get; set; }
-        public User user { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
     }
 }

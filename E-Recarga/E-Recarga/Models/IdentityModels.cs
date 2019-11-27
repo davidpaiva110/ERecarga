@@ -29,5 +29,11 @@ namespace E_Recarga.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<RedeProprietaria> RedesProprietarias { get; set; }
+        public DbSet<Estacao> Estacoes { get; set; }
+        public DbSet<Posto> Postos { get; set; }
+        public DbSet<Reserva> Reservas { get; set; }
     }
 }

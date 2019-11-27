@@ -10,7 +10,11 @@ namespace E_Recarga.Models
     public class Posto
     {
         [Key]
+        [Display(Name = "ID Posto")]
         public int PostoId { get; set; }
+        [Required(ErrorMessage = "Tem de especificar o estado do posto!")]
+        [Display(Name = "Estado")]
+        [DataType(DataType.Text)]
         public bool Estado { get; set; }
 
         [ForeignKey("Estacao")]

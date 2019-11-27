@@ -58,7 +58,7 @@ namespace E_Recarga.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Lembrar-me?")]
         public bool RememberMe { get; set; }
     }
 
@@ -70,14 +70,14 @@ namespace E_Recarga.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "A {0} deve ter pelo menos {2} caracteres.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirmar Password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "As passwords não coincidem.")]
         public string ConfirmPassword { get; set; }
 
         [Required]
@@ -94,13 +94,13 @@ namespace E_Recarga.Models
         [StringLength(16, ErrorMessage = "O Número do Cartão tem de ter 16 dígitos.", MinimumLength = 16)]
         public string NCartaoCredito { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Tem de especificar o titular do cartão")]
         [Display(Name = "Titular do Cartão")]
         public string TitularCartao { get; set; }
 
         [Required]
         [Display(Name = "CCV")]
-        [StringLength(3, ErrorMessage = "O CCV são os 3 dígitos atrás da parte de trás do cartão", MinimumLength = 3)]
+        [StringLength(3, ErrorMessage = "O CCV tem de ter 3 dígitos.", MinimumLength = 3)]
         public string Ccv { get; set; }
 
 

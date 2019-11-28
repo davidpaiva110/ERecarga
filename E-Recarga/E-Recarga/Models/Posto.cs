@@ -18,9 +18,20 @@ namespace E_Recarga.Models
         public bool Estado { get; set; }
 
         [ForeignKey("Estacao")]
+        [Display(Name = "Estação ID")]
         public int EstacaoId { get; set; }
         public Estacao Estacao { get; set; }
 
         public IList<Reserva> Reservas { get; set; }
+
+        public Posto(bool estado, int estacaoId)
+        {
+            Estado = estado;
+            EstacaoId = estacaoId;
+        }
+
+        public Posto()
+        {
+        }
     }
 }

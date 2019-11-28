@@ -27,6 +27,10 @@
                             <li class="nav-item">@Html.ActionLink("Reservar", "PesquisarPosto", "Reservations", null, new { @class = "nav-link" })</li>
                             <li class="nav-item">@Html.ActionLink("Histórico", "Historico", "Reservations", null, new { @class = "nav-link" })</li>
                         }
+                        else if (Request.IsAuthenticated && User.IsInRole("Rede Proprietaria"))
+                        {
+                            <li class="nav-item">@Html.ActionLink("Postos", "ListarPostos", "ManageStations", null, new { @class = "nav-link" })</li>
+                        }
                     </ul>
                     @Html.Partial("_LoginPartial")
                 </div>

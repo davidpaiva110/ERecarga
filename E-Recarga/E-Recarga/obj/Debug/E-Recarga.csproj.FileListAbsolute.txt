@@ -215,3 +215,4 @@ C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.
 D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Migrations.InitialCreate.resources
 D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Migrations.ModeloInicial.resources
 C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Migrations.RoleMigration.resources
+C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.csprojAssemblyReference.cache

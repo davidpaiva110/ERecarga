@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace E_Recarga.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Utilizador")]
     public class ReservationsController : Controller
     {
         // GET: Reservations

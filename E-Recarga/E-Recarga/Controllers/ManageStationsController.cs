@@ -12,9 +12,20 @@ namespace E_Recarga.Controllers
     public class ManageStationsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
         public ActionResult ListarPostos()
         {
             return View(db.Postos.OrderBy(c => c.PostoId).ToList());
+        }
+
+        public ActionResult ListarEstacoes()
+        {
+            return View(db.Estacoes.OrderBy(c => c.EstacaoId).ToList());
+        }
+
+        public ActionResult NovaEstacao()
+        {
+            return View();
         }
 
         public ActionResult NovoPosto()
@@ -23,6 +34,9 @@ namespace E_Recarga.Controllers
             ViewBag.Estacoes = new SelectList(db.Estacoes.Where(u => u.RedeProprietaria.AspNetUserId.Contains(userId)).ToList(), "Name", "Name");
             return View();
         }
+
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -35,6 +49,18 @@ namespace E_Recarga.Controllers
                 return RedirectToAction("ListarPostos");
             }
             return View(posto);
+        }
+
+        public ActionResult NovaEstacao([Bind(Include ="Cidade,Localizacao,Preco")] Estacao estacao)
+        {
+            if (ModelState.IsValid)
+            {
+                int id = Int32.Parse(User.Identity.GetUserId());
+                db.Estacoes.Add(new Estacao(estacao.Cidade, estacao.Localizacao, estacao.Preco, id));
+                db.SaveChanges();
+                return RedirectToAction("ListarEstacoes");
+            }
+            return View(estacao);
         }
     }
 }

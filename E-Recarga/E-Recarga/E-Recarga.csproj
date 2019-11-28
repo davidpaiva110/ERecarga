@@ -311,6 +311,8 @@
     <Content Include="Views\Reservations\Reservar.cshtml" />
     <Content Include="Views\ManageStations\ListarPostos.cshtml" />
     <Content Include="Views\ManageStations\NovoPosto.cshtml" />
+    <Content Include="Views\ManageStations\ListarEstacoes.cshtml" />
+    <Content Include="Views\ManageStations\NovaEstacao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

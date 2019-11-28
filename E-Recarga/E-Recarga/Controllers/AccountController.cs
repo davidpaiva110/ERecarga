@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using E_Recarga.Models;
+using static E_Recarga.Models.ApplicationDbContext;
 
 namespace E_Recarga.Controllers
 {
@@ -17,15 +18,31 @@ namespace E_Recarga.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationRoleManager _rolemanager;
+        private ApplicationDbContext context;
 
         public AccountController()
         {
+            context = new ApplicationDbContext();
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationRoleManager roleManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            RoleManager = roleManager;
+        }
+
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _rolemanager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _rolemanager = value;
+            }
         }
 
         public ApplicationSignInManager SignInManager
@@ -139,6 +156,7 @@ namespace E_Recarga.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.Roles = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin")).ToList(), "Name", "Name");
             return View();
         }
 
@@ -156,18 +174,21 @@ namespace E_Recarga.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    await UserManager.AddToRolesAsync(user.Id, model.Role); //Adiciona na tabela AspNetUserRoles. Atribui o utilizador ao Role. 
+                    if(model.Role=="Rede Proprietaria")
+                    {
+                        context.RedesProprietarias.Add(new RedeProprietaria(model.Nome, model.Nif, model.NCartaoCredito, model.TitularCartao, model.Ccv));
+                    }
+                    else
+                    {
+                        context.Users.Add(new User(model.Nome, model.Nif, model.NCartaoCredito, model.TitularCartao, model.Ccv));
+                    }
+                    await context.SaveChangesAsync();
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
-
+            ViewBag.Roles = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin")).ToList(), "Name", "Name");
             // If we got this far, something failed, redisplay form
             return View(model);
         }

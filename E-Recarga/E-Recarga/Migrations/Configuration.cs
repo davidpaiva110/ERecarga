@@ -1,5 +1,7 @@
 namespace E_Recarga.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -15,10 +17,20 @@ namespace E_Recarga.Migrations
 
         protected override void Seed(E_Recarga.Models.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            string[] roleNames = { "Admin", "Rede Proprietaria", "Utilizador" };
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
+            foreach (var roles in roleNames)
+            {
+                if (!roleManager.RoleExists(roles))
+                {
+                    var role = new IdentityRole();
+                    role.Name = roles;
+                    roleManager.Create(role);
+                }
+            }
+
+            base.Seed(context);
         }
     }
 }

@@ -38,5 +38,14 @@ namespace E_Recarga.Models
         public string CCV { get; set; }
 
         public IList<Reserva> Reservas { get; set; }
+
+        public User(string nome, string nif, string numeroCC, string titularCC, string cCV)
+        {
+            Nome = nome;
+            Nif = nif;
+            NumeroCC = numeroCC;
+            TitularCC = titularCC;
+            CCV = cCV;
+        }
     }
 }

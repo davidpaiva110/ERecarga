@@ -37,5 +37,14 @@ namespace E_Recarga.Models
         public string CCV { get; set; }
 
         public IList<Estacao> Estacoes { get; set; }
+
+        public RedeProprietaria(string nome, string nif, string numeroCC, string titularCC, string cCV)
+        {
+            Nome = nome;
+            Nif = nif;
+            NumeroCC = numeroCC;
+            TitularCC = titularCC;
+            CCV = cCV;
+        }
     }
 }

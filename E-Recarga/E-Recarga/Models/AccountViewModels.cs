@@ -64,12 +64,12 @@ namespace E_Recarga.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "O campo Email é obrigatório!")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "O campo Password é obrigatório!")]
         [StringLength(100, ErrorMessage = "A {0} deve ter pelo menos {2} caracteres.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
@@ -80,29 +80,32 @@ namespace E_Recarga.Models
         [Compare("Password", ErrorMessage = "As passwords não coincidem.")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "O campo Nome é obrigatório!")]
         [Display(Name = "Nome")]
         public string Nome { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "O campo NIF é obrigatório!")]
         [Display(Name = "NIF")]
-        [StringLength(9, ErrorMessage ="O NIF tem de ter 9 dígitos.", MinimumLength = 9)]
+        [StringLength(9, ErrorMessage = "O NIF tem de ter 9 dígitos.", MinimumLength = 9)]
         public string Nif { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "O campo Número do Cartão é obrigatório!")]
         [Display(Name = "Número do Cartão")]
         [StringLength(16, ErrorMessage = "O Número do Cartão tem de ter 16 dígitos.", MinimumLength = 16)]
         public string NCartaoCredito { get; set; }
 
-        [Required(ErrorMessage ="Tem de especificar o titular do cartão")]
+        [Required(ErrorMessage = "O campo Titular do Cartão é obrigatório!")]
         [Display(Name = "Titular do Cartão")]
         public string TitularCartao { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "O campo CCV é obrigatório!")]
         [Display(Name = "CCV")]
         [StringLength(3, ErrorMessage = "O CCV tem de ter 3 dígitos.", MinimumLength = 3)]
         public string Ccv { get; set; }
 
+        [Required(ErrorMessage = "O campo Tipo de Conta é obrigatório!")]
+        [Display(Name = "Tipo de Conta")]
+        public string Role { get; set; }
 
     }
 

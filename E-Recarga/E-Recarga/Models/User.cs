@@ -11,7 +11,10 @@ namespace E_Recarga.Models
         [Key]
         [Display(Name = "ID User")]
         public int UserId { get; set; }
-
+        [Display(Name = "ID AspNetUser")]
+        [Required(ErrorMessage = "Tem de especificar o ID do AspNetUser!")]
+        [DataType(DataType.Text)]
+        public string AspNetUserId { get; set; }
         [Display(Name = "Nome")]
         [Required(ErrorMessage = "Tem de especificar o nome do User")]
         [DataType(DataType.Text)]
@@ -39,8 +42,9 @@ namespace E_Recarga.Models
 
         public IList<Reserva> Reservas { get; set; }
 
-        public User(string nome, string nif, string numeroCC, string titularCC, string cCV)
+        public User(string id, string nome, string nif, string numeroCC, string titularCC, string cCV)
         {
+            AspNetUserId = id;
             Nome = nome;
             Nif = nif;
             NumeroCC = numeroCC;

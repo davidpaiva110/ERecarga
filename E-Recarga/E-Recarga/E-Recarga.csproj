@@ -189,6 +189,10 @@
     <Compile Include="Migrations\201911280023250_RoleMigration.Designer.cs">
       <DependentUpon>201911280023250_RoleMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911280459100_ModelosCorrigidos.cs" />
+    <Compile Include="Migrations\201911280459100_ModelosCorrigidos.Designer.cs">
+      <DependentUpon>201911280459100_ModelosCorrigidos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Estacao.cs" />
@@ -331,6 +335,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911280023250_RoleMigration.resx">
       <DependentUpon>201911280023250_RoleMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911280459100_ModelosCorrigidos.resx">
+      <DependentUpon>201911280459100_ModelosCorrigidos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

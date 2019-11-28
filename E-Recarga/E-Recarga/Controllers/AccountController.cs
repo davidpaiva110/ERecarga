@@ -177,11 +177,11 @@ namespace E_Recarga.Controllers
                     await UserManager.AddToRolesAsync(user.Id, model.Role); //Adiciona na tabela AspNetUserRoles. Atribui o utilizador ao Role. 
                     if(model.Role=="Rede Proprietaria")
                     {
-                        context.RedesProprietarias.Add(new RedeProprietaria(model.Nome, model.Nif, model.NCartaoCredito, model.TitularCartao, model.Ccv));
+                        context.RedesProprietarias.Add(new RedeProprietaria(user.Id, model.Nome, model.Nif, model.NCartaoCredito, model.TitularCartao, model.Ccv));
                     }
                     else
                     {
-                        context.Users.Add(new User(model.Nome, model.Nif, model.NCartaoCredito, model.TitularCartao, model.Ccv));
+                        context.Users.Add(new User(user.Id, model.Nome, model.Nif, model.NCartaoCredito, model.TitularCartao, model.Ccv));
                     }
                     await context.SaveChangesAsync();
                     return RedirectToAction("Index", "Home");

@@ -19,8 +19,8 @@ namespace E_Recarga.Controllers
 
         public ActionResult NovoPosto()
         {
-            int id = Int32.Parse(User.Identity.GetUserId());
-            ViewBag.Estacoes = new SelectList(db.Estacoes.Where(u => u.RedeProprietariaId == id).ToList(), "Name", "Name");
+            string userId = User.Identity.GetUserId();
+            ViewBag.Estacoes = new SelectList(db.Estacoes.Where(u => u.RedeProprietaria.AspNetUserId.Contains(userId)).ToList(), "Name", "Name");
             return View();
         }
 

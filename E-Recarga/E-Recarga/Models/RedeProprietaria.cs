@@ -9,9 +9,12 @@ namespace E_Recarga.Models
     public class RedeProprietaria
     {
         [Key]
-        [Display(Name="ID Rede Propriatária")]
+        [Display(Name="ID Rede Proprietária")]
         public int RedeProprietariaId { get; set; }
-
+        [Display(Name = "ID AspNetUser")]
+        [Required(ErrorMessage = "Tem de especificar o ID do AspNetUser!")]
+        [DataType(DataType.Text)]
+        public string AspNetUserId { get; set; }
         [Display(Name = "Nome")]
         [Required(ErrorMessage = "Tem de especificar o nome da rede propriatária")]
         [DataType(DataType.Text)]
@@ -38,8 +41,9 @@ namespace E_Recarga.Models
 
         public IList<Estacao> Estacoes { get; set; }
 
-        public RedeProprietaria(string nome, string nif, string numeroCC, string titularCC, string cCV)
+        public RedeProprietaria(string id, string nome, string nif, string numeroCC, string titularCC, string cCV)
         {
+            AspNetUserId = id;
             Nome = nome;
             Nif = nif;
             NumeroCC = numeroCC;

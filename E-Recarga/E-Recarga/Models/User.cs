@@ -10,11 +10,8 @@ namespace E_Recarga.Models
     {
         [Key]
         [Display(Name = "ID User")]
-        public int UserId { get; set; }
-        [Display(Name = "ID AspNetUser")]
-        [Required(ErrorMessage = "Tem de especificar o ID do AspNetUser!")]
-        [DataType(DataType.Text)]
-        public string AspNetUserId { get; set; }
+        public string UserId { get; set; }
+
         [Display(Name = "Nome")]
         [Required(ErrorMessage = "Tem de especificar o nome do User")]
         [DataType(DataType.Text)]
@@ -44,7 +41,7 @@ namespace E_Recarga.Models
 
         public User(string id, string nome, string nif, string numeroCC, string titularCC, string cCV)
         {
-            AspNetUserId = id;
+            UserId = id;
             Nome = nome;
             Nif = nif;
             NumeroCC = numeroCC;

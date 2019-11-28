@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data;
+using System.Data.Entity;
 
 namespace E_Recarga.Controllers
 {
@@ -15,12 +17,15 @@ namespace E_Recarga.Controllers
 
         public ActionResult ListarPostos()
         {
-            return View(db.Postos.OrderBy(c => c.PostoId).ToList());
+            string userId = User.Identity.GetUserId();
+            var postos = db.Postos.Include(r => r.Estacao).Where(r=>r.Estacao.RedeProprietariaId.Contains(userId));
+            return View(postos.ToList());
         }
 
         public ActionResult ListarEstacoes()
         {
-            return View(db.Estacoes.OrderBy(c => c.EstacaoId).ToList());
+            string userId = User.Identity.GetUserId();
+            return View(db.Estacoes.Where(c => c.RedeProprietariaId.Contains(userId)).ToList());
         }
 
         public ActionResult NovaEstacao()
@@ -34,9 +39,6 @@ namespace E_Recarga.Controllers
             ViewBag.Estacoes = new SelectList(db.Estacoes.Where(u => u.RedeProprietariaId.Contains(userId)).ToList(), "EstacaoId", "EstacaoId");
             return View();
         }
-
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -66,6 +68,64 @@ namespace E_Recarga.Controllers
                 return RedirectToAction("ListarEstacoes");
             }
             return View(estacao);
+        }
+
+        public ActionResult EditarPosto()
+        {
+            return View();
+        }
+
+        public ActionResult EditarEstacao()
+        {
+            return View();
+        }
+
+        public ActionResult DetalhesPosto()
+        {
+            return View();
+        }
+
+        public ActionResult DetalhesEstacao()
+        {
+            return View();
+        }
+
+        public ActionResult RemoverPosto()
+        {
+            return View();
+        }
+
+        public ActionResult RemoverEstacao()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditarPosto([Bind(Include = "Cidade,Localizacao,Preco")] Estacao estacao)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditarEstacao([Bind(Include = "Cidade,Localizacao,Preco")] Estacao estacao)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoverPosto([Bind(Include = "Cidade,Localizacao,Preco")] Estacao estacao)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoverEstacao([Bind(Include = "Cidade,Localizacao,Preco")] Estacao estacao)
+        {
+            return View();
         }
     }
 }

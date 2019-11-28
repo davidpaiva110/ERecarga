@@ -301,6 +301,12 @@
     <Content Include="Views\RedeProprietariaManage\ListarPostos.cshtml" />
     <Content Include="Views\RedeProprietariaManage\NovaEstacao.cshtml" />
     <Content Include="Views\RedeProprietariaManage\NovoPosto.cshtml" />
+    <Content Include="Views\RedeProprietariaManage\EditarPosto.cshtml" />
+    <Content Include="Views\RedeProprietariaManage\EditarEstacao.cshtml" />
+    <Content Include="Views\RedeProprietariaManage\DetalhesPosto.cshtml" />
+    <Content Include="Views\RedeProprietariaManage\DetalhesEstacao.cshtml" />
+    <Content Include="Views\RedeProprietariaManage\RemoverPosto.cshtml" />
+    <Content Include="Views\RedeProprietariaManage\RemoverEstacao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

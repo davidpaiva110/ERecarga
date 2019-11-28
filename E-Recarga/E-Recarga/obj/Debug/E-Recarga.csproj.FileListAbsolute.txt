@@ -210,11 +210,9 @@ D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.csproj.GenerateRes
 D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.csproj.CopyComplete
 D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.dll
 D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.pdb
-C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Migrations.InitialCreate.resources
 C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Migrations.ModeloInicial.resources
 D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Migrations.InitialCreate.resources
 D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Migrations.ModeloInicial.resources
-C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Migrations.RoleMigration.resources
 C:\Users\rafas\Desktop\ERecarga-57\ERecarga-57\E-Recarga\E-Recarga\bin\E-Recarga.dll.config
 C:\Users\rafas\Desktop\ERecarga-57\ERecarga-57\E-Recarga\E-Recarga\bin\E-Recarga.dll
 C:\Users\rafas\Desktop\ERecarga-57\ERecarga-57\E-Recarga\E-Recarga\bin\E-Recarga.pdb
@@ -322,3 +320,4 @@ C:\Users\rafas\Desktop\ERecarga-57\ERecarga-57\E-Recarga\E-Recarga\obj\Debug\E-R
 C:\Users\rafas\Desktop\ERecarga-57\ERecarga-57\E-Recarga\E-Recarga\obj\Debug\E-Recarga.dll
 C:\Users\rafas\Desktop\ERecarga-57\ERecarga-57\E-Recarga\E-Recarga\obj\Debug\E-Recarga.pdb
 C:\Users\rafas\Desktop\ERecarga-57\ERecarga-57\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Migrations.ModeloInicial.resources
+C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.csprojAssemblyReference.cache

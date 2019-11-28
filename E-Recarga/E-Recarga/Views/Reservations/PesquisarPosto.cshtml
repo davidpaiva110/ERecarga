@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "Pesquisar Posto";
+}
+
+<style>
+    input,
+    select,
+    textarea {
+        max-width: 100%;
+    }
+</style>
+
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Reservar Posto de Carregamento</h1>
+        <p class="lead text-muted mb-0">Pesquise postos de carregamento para um horário e cidade!</p>
+    </div>
+</section>
+
+<section class="search-sec">
+    <div class="container">
+        <form action="#" method="post" novalidate="novalidate">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <input type="text" class="form-control search-slt" placeholder="Localidade">
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-12 p-0">
+                            <input type="text" class="form-control search-slt" placeholder="Data">
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-12 p-0">
+                            <input type="text" class="form-control search-slt" placeholder="Hora Início">
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-12 p-0">
+                            <input type="text" class="form-control search-slt" placeholder="Hora Fim">
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <button type="button" class="btn btn-primary wrn-btn">Procurar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<br/>
+    <div class="container">
+        <div class="row">
+            <h2 class="font-weight-bold">Postos de Carregamento Disponíveis</h2>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Nº do Posto</th>
+                        <th scope="col">Rede Proprietária</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Custo por Carregamento</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Tesla</td>
+                        <td>Estação de Comboios Coimbra-B</td>
+                        <td>0,52€</td>
+                        <td>@Html.ActionLink("Reservar", "Reservar")</td>
+                    </tr>
+                    <tr>
+                        <td>32</td>
+                        <td>MOBI.E</td>
+                        <td>Fórum Coimbra</td>
+                        <td>0,47€</td>
+                        <td>@Html.ActionLink("Reservar", "Reservar")</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>

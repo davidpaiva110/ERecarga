@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Historico";
+}
+
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Histórico de Reservas</h1>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Cidade</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>16/11/2019</td>
+                    <td>Coimbra</td>
+                    <td>0,47€</td>
+                    <td>@Html.ActionLink("Detalhes", "Detalhes")</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>27/12/2019</td>
+                    <td>Coimbra</td>
+                    <td>0,52€</td>
+                    <td>@Html.ActionLink("Detalhes", "Detalhes")</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

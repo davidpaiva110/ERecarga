@@ -28,7 +28,20 @@ namespace E_Recarga.Models
         [ForeignKey("RedeProprietaria")]
         public int RedeProprietariaId { get; set; }
         public RedeProprietaria RedeProprietaria { get; set; }
-
+        
         public IList<Posto> Postos { get; set; }
+
+        public Estacao()
+        {
+        }
+
+        public Estacao(string cidade, string localizacao, double preco, int redeProprietariaId)
+        {
+            Cidade = cidade;
+            Localizacao = localizacao;
+            Preco = preco;
+            RedeProprietariaId = redeProprietariaId;
+        }
+
     }
 }

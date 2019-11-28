@@ -204,7 +204,6 @@ D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\bin\Microsoft.Owin.Security.Twitter.xm
 D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\bin\Microsoft.Owin.Security.OAuth.xml
 D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.csprojAssemblyReference.cache
 D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Properties.Resources.resources
 D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.csproj.GenerateResource.cache
 D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.csproj.CopyComplete
@@ -216,3 +215,4 @@ D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Migrations.Initial
 D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Migrations.ModeloInicial.resources
 C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Migrations.RoleMigration.resources
 C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.csprojAssemblyReference.cache
+D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Migrations.RoleMigration.resources

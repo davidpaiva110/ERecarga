@@ -169,11 +169,11 @@ namespace E_Recarga.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Nome, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     await UserManager.AddToRolesAsync(user.Id, model.Role); //Adiciona na tabela AspNetUserRoles. Atribui o utilizador ao Role. 
                     if(model.Role=="Rede Proprietaria")
                     {
@@ -184,7 +184,7 @@ namespace E_Recarga.Controllers
                         context.Users.Add(new User(user.Id, model.Nome, model.Nif, model.NCartaoCredito, model.TitularCartao, model.Ccv));
                     }
                     await context.SaveChangesAsync();
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Login", "Account");
                 }
                 AddErrors(result);
             }

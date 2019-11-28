@@ -12,7 +12,6 @@ namespace E_Recarga.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "E_Recarga.Models.ApplicationDbContext";
         }
 
         protected override void Seed(E_Recarga.Models.ApplicationDbContext context)

@@ -172,26 +172,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\ManageStationsController.cs" />
+    <Compile Include="Controllers\RedeProprietariaManageController.cs" />
     <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201911091839079_InitialCreate.cs" />
-    <Compile Include="Migrations\201911091839079_InitialCreate.Designer.cs">
-      <DependentUpon>201911091839079_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911270147137_ModeloInicial.cs" />
-    <Compile Include="Migrations\201911270147137_ModeloInicial.Designer.cs">
-      <DependentUpon>201911270147137_ModeloInicial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911280023250_RoleMigration.cs" />
-    <Compile Include="Migrations\201911280023250_RoleMigration.Designer.cs">
-      <DependentUpon>201911280023250_RoleMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911280459100_ModelosCorrigidos.cs" />
-    <Compile Include="Migrations\201911280459100_ModelosCorrigidos.Designer.cs">
-      <DependentUpon>201911280459100_ModelosCorrigidos.cs</DependentUpon>
+    <Compile Include="Migrations\201911280655130_ModeloInicial.cs" />
+    <Compile Include="Migrations\201911280655130_ModeloInicial.Designer.cs">
+      <DependentUpon>201911280655130_ModeloInicial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -309,8 +297,10 @@
     <Content Include="Views\Reservations\Historico.cshtml" />
     <Content Include="Views\Reservations\Detalhes.cshtml" />
     <Content Include="Views\Reservations\Reservar.cshtml" />
-    <Content Include="Views\ManageStations\ListarPostos.cshtml" />
-    <Content Include="Views\ManageStations\NovoPosto.cshtml" />
+    <Content Include="Views\RedeProprietariaManage\ListarEstacoes.cshtml" />
+    <Content Include="Views\RedeProprietariaManage\ListarPostos.cshtml" />
+    <Content Include="Views\RedeProprietariaManage\NovaEstacao.cshtml" />
+    <Content Include="Views\RedeProprietariaManage\NovoPosto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -327,17 +317,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201911091839079_InitialCreate.resx">
-      <DependentUpon>201911091839079_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911270147137_ModeloInicial.resx">
-      <DependentUpon>201911270147137_ModeloInicial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911280023250_RoleMigration.resx">
-      <DependentUpon>201911280023250_RoleMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911280459100_ModelosCorrigidos.resx">
-      <DependentUpon>201911280459100_ModelosCorrigidos.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911280655130_ModeloInicial.resx">
+      <DependentUpon>201911280655130_ModeloInicial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

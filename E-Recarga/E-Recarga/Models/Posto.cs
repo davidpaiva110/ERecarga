@@ -18,7 +18,6 @@ namespace E_Recarga.Models
         public bool Estado { get; set; }
 
         [ForeignKey("Estacao")]
-        [Display(Name = "Estação ID")]
         public int EstacaoId { get; set; }
         public Estacao Estacao { get; set; }
 

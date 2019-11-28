@@ -9,12 +9,9 @@ namespace E_Recarga.Models
     public class RedeProprietaria
     {
         [Key]
-        [Display(Name="ID Rede Proprietária")]
-        public int RedeProprietariaId { get; set; }
-        [Display(Name = "ID AspNetUser")]
-        [Required(ErrorMessage = "Tem de especificar o ID do AspNetUser!")]
-        [DataType(DataType.Text)]
-        public string AspNetUserId { get; set; }
+        [Display(Name="ID Rede Propriatária")]
+        public string RedeProprietariaId { get; set; }
+
         [Display(Name = "Nome")]
         [Required(ErrorMessage = "Tem de especificar o nome da rede propriatária")]
         [DataType(DataType.Text)]
@@ -43,12 +40,16 @@ namespace E_Recarga.Models
 
         public RedeProprietaria(string id, string nome, string nif, string numeroCC, string titularCC, string cCV)
         {
-            AspNetUserId = id;
+            RedeProprietariaId = id;
             Nome = nome;
             Nif = nif;
             NumeroCC = numeroCC;
             TitularCC = titularCC;
             CCV = cCV;
+        }
+
+        public RedeProprietaria()
+        {
         }
     }
 }

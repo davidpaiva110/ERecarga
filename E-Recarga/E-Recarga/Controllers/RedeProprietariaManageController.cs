@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data;
 using System.Data.Entity;
+using System.Net;
 
 namespace E_Recarga.Controllers
 {
@@ -80,9 +81,18 @@ namespace E_Recarga.Controllers
             return View();
         }
 
-        public ActionResult DetalhesPosto()
+        public ActionResult DetalhesPosto(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Posto posto = db.Postos.Include(r => r.Estacao).SingleOrDefault(r => r.PostoId==id);
+            if (posto == null)
+            {
+                return HttpNotFound();
+            }
+            return View(posto);
         }
 
         public ActionResult DetalhesEstacao()

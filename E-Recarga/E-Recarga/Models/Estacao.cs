@@ -41,5 +41,6 @@ namespace E_Recarga.Models
             Localizacao = localizacao;
             Preco = preco;
         }
+
     }
 }

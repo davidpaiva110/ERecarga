@@ -1,7 +1,52 @@
-﻿
+﻿@model E_Recarga.Models.Estacao
 @{
     ViewBag.Title = "DetalhesEstacao";
 }
 
-<h2>DetalhesEstacao</h2>
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Estação</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EstacaoId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstacaoId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Localizacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Localizacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Preco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Preco)€
+        </dd>
+
+        
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "EditarEstacao", new { id = Model.EstacaoId }) |
+    @Html.ActionLink("Lista das Estações", "ListarEstacoes")
+</p>
 

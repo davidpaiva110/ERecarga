@@ -71,14 +71,34 @@ namespace E_Recarga.Controllers
             return View(estacao);
         }
 
-        public ActionResult EditarPosto()
+        public ActionResult EditarPosto(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Posto posto = db.Postos.Find(id);
+            if (posto == null)
+            {
+                return HttpNotFound();
+            }
+            string userId = User.Identity.GetUserId();
+            ViewBag.Estacoes = new SelectList(db.Estacoes.Where(u => u.RedeProprietariaId.Contains(userId)).ToList(), "EstacaoId", "EstacaoId");
+            return View(posto);
         }
 
-        public ActionResult EditarEstacao()
+        public ActionResult EditarEstacao(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Estacao estacao = db.Estacoes.Find(id);
+            if (estacao == null)
+            {
+                return HttpNotFound();
+            }
+            return View(estacao);
         }
 
         public ActionResult DetalhesPosto(int? id)
@@ -110,42 +130,94 @@ namespace E_Recarga.Controllers
             return View(estacao);
         }
 
-        public ActionResult RemoverPosto()
+        public ActionResult RemoverPosto(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Posto posto = db.Postos.Include(r => r.Estacao).SingleOrDefault(r => r.PostoId == id);
+            if (posto == null)
+            {
+                return HttpNotFound();
+            }
+            return View(posto);
         }
 
-        public ActionResult RemoverEstacao()
+        public ActionResult RemoverEstacao(int? id)
         {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditarPosto([Bind(Include = "Cidade,Localizacao,Preco")] Estacao estacao)
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditarEstacao([Bind(Include = "Cidade,Localizacao,Preco")] Estacao estacao)
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult RemoverPosto([Bind(Include = "Cidade,Localizacao,Preco")] Estacao estacao)
-        {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Estacao estacao = db.Estacoes.Find(id);
+            if (estacao == null)
+            {
+                return HttpNotFound();
+            }
+            return View(estacao);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult RemoverEstacao([Bind(Include = "Cidade,Localizacao,Preco")] Estacao estacao)
+        public ActionResult EditarPosto([Bind(Include = "PostoId,Estado,EstacaoId")] Posto posto)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                db.Entry(posto).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ListarPostos");
+            }
+            return View(posto);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditarEstacao([Bind(Include = "EstacaoId,Cidade,Localizacao,Preco, RedeProprietariaId")] Estacao estacao)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(estacao).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ListarEstacoes");
+            }
+            return View(estacao);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoverPosto(int id)
+        {
+            Posto posto = db.Postos.Include(r => r.Estacao).SingleOrDefault(r => r.PostoId == id);
+
+            var reservasAssociadas = db.Reservas.Where(c => c.PostoId == id);
+            if (reservasAssociadas.Count() > 0)
+            {
+                ModelState.AddModelError("", "Não é possível apagar postos com reservas associadas!");
+                return View(posto); //Não permite apagar postos com alguma reserva associada!
+            }
+
+            db.Postos.Remove(posto);
+            db.SaveChanges();
+            return RedirectToAction("ListarPostos");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoverEstacao(int id)
+        {
+            Estacao estacao = db.Estacoes.Find(id);
+
+            var postosAssociados = db.Postos.Where(c => c.EstacaoId == id);
+            if (postosAssociados.Count() > 0)
+            {
+                ModelState.AddModelError("", "Não é possível apagar estações com postos associados!");
+                return View(estacao); //Não permite apagar estações com algum posto associado!
+            }
+
+            db.Estacoes.Remove(estacao);
+            db.SaveChanges();
+            return RedirectToAction("ListarEstacoes");
         }
     }
 }

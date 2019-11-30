@@ -1,7 +1,73 @@
-﻿
+﻿@model E_Recarga.Models.Posto
+
 @{
     ViewBag.Title = "RemoverPosto";
 }
 
-<h2>RemoverPosto</h2>
+<h2>Remover</h2>
+
+<div>
+    <h4>Posto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PostoId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PostoId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+        <dd>
+            @if (Model.Estado == true)
+            {
+                WriteLiteral("Ativo");
+            }
+            else
+            {
+                WriteLiteral("Aguarda Aprovação");
+            }
+        </dd>
+        <hr />
+        <dt>
+            @Html.DisplayNameFor(model => model.EstacaoId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EstacaoId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estacao.Cidade)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Estacao.Cidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estacao.Localizacao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Estacao.Localizacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Estacao.Preco)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Estacao.Preco)€
+        </dd>
+    </dl>
+    @using (Html.BeginForm("RemoverPosto", "RedeProprietariaManage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-actions no-color">
+            <input type="submit" value="Remover" class="btn btn-danger" /> |
+            @Html.ActionLink("Lista de Postos", "ListarPostos")
+        </div>
+    }
+</div>
+
 

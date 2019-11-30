@@ -1,7 +1,56 @@
-﻿
+﻿@model E_Recarga.Models.Estacao
 @{
     ViewBag.Title = "RemoverEstacao";
 }
 
-<h2>RemoverEstacao</h2>
+<h2>Remover</h2>
+
+<div>
+    <h4>Estação</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EstacaoId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstacaoId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Localizacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Localizacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Preco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Preco)€
+        </dd>
+    </dl>
+    @using (Html.BeginForm("RemoverEstacao", "RedeProprietariaManage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-actions no-color">
+            <input type="submit" value="Remover" class="btn btn-danger" /> |
+            @Html.ActionLink("Lista de Estações", "ListarEstacoes")
+        </div>
+    }
+</div>
+
+
 

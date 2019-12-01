@@ -12,14 +12,18 @@ namespace E_Recarga.Models
         [Key]
         [Display(Name = "ID Estação")]
         public int ReservaId { get; set; }
-        [Required(ErrorMessage = "Tem de especificar a data e hora de início da reserva!")]
-        [Display(Name = "Horário Início")]
-        [DataType(DataType.DateTime)]
-        public DateTime HorarioInicio { get; set; }
-        [Required(ErrorMessage = "Tem de especificar a data e hora de fim da reserva!")]
-        [Display(Name = "Horário Fim")]
-        [DataType(DataType.DateTime)]
-        public DateTime HorarioFim { get; set; }
+        [Required(ErrorMessage = "Tem de especificar a data da reserva!")]
+        [Display(Name = "Data")]
+        [DataType(DataType.Date)]
+        public DateTime Data { get; set; }
+        [Required(ErrorMessage = "Tem de especificar a hora de início da reserva!")]
+        [Display(Name = "Hora de Início")]
+        [DataType(DataType.Time)]
+        public DateTime HoraInicio { get; set; }
+        [Required(ErrorMessage = "Tem de especificar a hora de fim da reserva!")]
+        [Display(Name = "Hora de Fim")]
+        [DataType(DataType.Time)]
+        public DateTime HoraFim { get; set; }
 
         [ForeignKey("Posto")]
         public int PostoId { get; set; }

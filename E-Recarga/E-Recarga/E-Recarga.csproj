@@ -174,12 +174,17 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RedeProprietariaManageController.cs" />
     <Compile Include="Controllers\ReservationsController.cs" />
+    <Compile Include="Controllers\UserManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201911280655130_ModeloInicial.cs" />
     <Compile Include="Migrations\201911280655130_ModeloInicial.Designer.cs">
       <DependentUpon>201911280655130_ModeloInicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912011641349_ModeloReservasAtualizado.cs" />
+    <Compile Include="Migrations\201912011641349_ModeloReservasAtualizado.Designer.cs">
+      <DependentUpon>201912011641349_ModeloReservasAtualizado.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -307,6 +312,8 @@
     <Content Include="Views\RedeProprietariaManage\DetalhesEstacao.cshtml" />
     <Content Include="Views\RedeProprietariaManage\RemoverPosto.cshtml" />
     <Content Include="Views\RedeProprietariaManage\RemoverEstacao.cshtml" />
+    <Content Include="Views\UserManage\PesquisarPostos.cshtml" />
+    <Content Include="Views\UserManage\ListaPostosDisponiveis.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -325,6 +332,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201911280655130_ModeloInicial.resx">
       <DependentUpon>201911280655130_ModeloInicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912011641349_ModeloReservasAtualizado.resx">
+      <DependentUpon>201912011641349_ModeloReservasAtualizado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

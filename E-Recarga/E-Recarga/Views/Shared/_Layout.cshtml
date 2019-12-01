@@ -24,7 +24,7 @@
                         <li class="nav-item">@Html.ActionLink("Contactos", "Contact", "Home", null, new { @class = "nav-link" })</li>
                         @if (Request.IsAuthenticated && User.IsInRole("Utilizador"))
                         {
-                            <li class="nav-item">@Html.ActionLink("Reservar", "PesquisarPosto", "Reservations", null, new { @class = "nav-link" })</li>
+                            <li class="nav-item">@Html.ActionLink("Reservar", "PesquisarPostos", "UserManage", null, new { @class = "nav-link" })</li>
                             <li class="nav-item">@Html.ActionLink("Histórico", "Historico", "Reservations", null, new { @class = "nav-link" })</li>
                         }
                         else if (Request.IsAuthenticated && User.IsInRole("Rede Proprietaria"))

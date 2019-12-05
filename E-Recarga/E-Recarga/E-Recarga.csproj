@@ -174,7 +174,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RedeProprietariaManageController.cs" />
-    <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="Controllers\UserManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -299,10 +298,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Reservations\PesquisarPosto.cshtml" />
-    <Content Include="Views\Reservations\Historico.cshtml" />
-    <Content Include="Views\Reservations\Detalhes.cshtml" />
-    <Content Include="Views\Reservations\Reservar.cshtml" />
     <Content Include="Views\RedeProprietariaManage\ListarEstacoes.cshtml" />
     <Content Include="Views\RedeProprietariaManage\ListarPostos.cshtml" />
     <Content Include="Views\RedeProprietariaManage\NovaEstacao.cshtml" />
@@ -321,6 +316,10 @@
     <Content Include="Views\AdminManage\ListarRedesAdmin.cshtml" />
     <Content Include="Views\AdminManage\DetalhesRedesAdmin.cshtml" />
     <Content Include="Views\AdminManage\RemoverRedesAdmin.cshtml" />
+    <Content Include="Views\UserManage\ConcluirReserva.cshtml" />
+    <Content Include="Views\UserManage\HistoricoReservas.cshtml" />
+    <Content Include="Views\UserManage\DetalhesReserva.cshtml" />
+    <Content Include="Views\UserManage\CancelarReserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

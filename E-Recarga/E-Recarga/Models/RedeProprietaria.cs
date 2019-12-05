@@ -12,12 +12,12 @@ namespace E_Recarga.Models
         [Display(Name="ID Rede Propriatária")]
         public string RedeProprietariaId { get; set; }
 
-        [Display(Name = "Nome")]
-        [Required(ErrorMessage = "Tem de especificar o nome da rede propriatária")]
+        [Display(Name = "Rede Proprietária")]
+        [Required(ErrorMessage = "Tem de especificar o nome da rede proprietária")]
         [DataType(DataType.Text)]
         public string Nome { get; set; }
         [Display(Name = "NIF")]
-        [Required(ErrorMessage = "Tem de especificar o NIF da rede propriatária")]
+        [Required(ErrorMessage = "Tem de especificar o NIF da rede proprietária")]
         [DataType(DataType.Text), MaxLength(9)]
         public string Nif { get; set; }
 

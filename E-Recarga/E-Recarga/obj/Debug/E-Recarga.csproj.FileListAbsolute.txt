@@ -211,6 +211,8 @@ D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.csproj.GenerateRes
 D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.csproj.CopyComplete
 D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.dll
 D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.pdb
+D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.csprojAssemblyReference.cache
+D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Migrations.ModeloReservasAtualizado.resources
 C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\bin\E-Recarga.dll.config
 C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\bin\E-Recarga.dll
 C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\bin\E-Recarga.pdb
@@ -311,14 +313,12 @@ C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\bin\Microsoft.Owin.S
 C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.csprojAssemblyReference.cache
 C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Migrations.ModeloInicial.resources
+C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Migrations.ModeloReservasAtualizado.resources
 C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Properties.Resources.resources
 C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.csproj.GenerateResource.cache
 C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.csproj.CoreCompileInputs.cache
 C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.csproj.CopyComplete
 C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.dll
 C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.pdb
-C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Migrations.ModeloReservasAtualizado.resources
-C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.csprojAssemblyReference.cache
-D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.csprojAssemblyReference.cache
-D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Migrations.ModeloReservasAtualizado.resources

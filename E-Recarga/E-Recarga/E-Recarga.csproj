@@ -318,6 +318,9 @@
     <Content Include="Views\AdminManage\ListarPostosPendentes.cshtml" />
     <Content Include="Views\AdminManage\AceitarPostoAdmin.cshtml" />
     <Content Include="Views\AdminManage\RemoverPostoAdmin.cshtml" />
+    <Content Include="Views\AdminManage\ListarRedesAdmin.cshtml" />
+    <Content Include="Views\AdminManage\DetalhesRedesAdmin.cshtml" />
+    <Content Include="Views\AdminManage\RemoverRedesAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

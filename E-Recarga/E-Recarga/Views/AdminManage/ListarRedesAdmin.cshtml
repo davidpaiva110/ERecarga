@@ -1,0 +1,46 @@
+﻿@model IEnumerable<E_Recarga.Models.RedeProprietaria>
+
+@{
+    ViewBag.Title = "ListarRedesAdmin";
+}
+
+<br />
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Redes Poprietárias</h1>
+        <p class="lead text-muted mb-0">Lista de Redes da ERecarga.</p>
+    </div>
+</section>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nif)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var rede in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => rede.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => rede.Nif)
+            </td>
+            <td>
+                @Html.ActionLink("Detalhes", "DetalhesRedesAdmin", new { id = rede.RedeProprietariaId }) |
+                @Html.ActionLink("Remover", "RemoverRedesAdmin", new { id = rede.RedeProprietariaId })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

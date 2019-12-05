@@ -77,5 +77,37 @@ namespace E_Recarga.Controllers
             return RedirectToAction("ListarPostosPendentes");
         }
 
+
+        public ActionResult ListarRedesAdmin()
+        {
+            List<RedeProprietaria> redes = new List<RedeProprietaria>();
+            var redesdb = db.RedesProprietarias.Include(r => r.Estacoes);
+            foreach (RedeProprietaria est in redesdb)
+                redes.Add(est);
+            return View(redes.ToList());
+        }
+
+        public ActionResult DetalhesRedesAdmin(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            RedeProprietaria rede = db.RedesProprietarias.Find(id);
+            if (rede == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.rede = rede;
+            List<Estacao> estacoes = new List<Estacao>();
+            var estadoesdb = db.Estacoes.Include(r => r.Postos).Where(r => r.RedeProprietariaId == id);
+            foreach (Estacao est in estadoesdb)
+                estacoes.Add(est);
+
+            return View(estacoes.ToList());
+        }
+
+        
+
     }
 }

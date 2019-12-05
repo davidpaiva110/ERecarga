@@ -1,0 +1,62 @@
+﻿@model E_Recarga.Models.Reserva
+@{
+    ViewBag.Title = "ConcluirReserva";
+}
+
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Concluir Reserva</h1>
+    </div>
+</section>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Rede Proprietária</dt>
+        <dd>@ViewBag.posto.Estacao.RedeProprietaria.Nome</dd>
+
+        <dt>Cidade</dt>
+        <dd>@ViewBag.posto.Estacao.Cidade</dd>
+
+        <dt>Localização</dt>
+        <dd>@ViewBag.posto.Estacao.Localizacao</dd>
+
+        <dt>Preço</dt>
+        <dd>@ViewBag.posto.Estacao.Preco€</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.PostoId)</dt>
+        <dd>@Html.DisplayFor(model => model.PostoId)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Data)</dt>
+        <dd>@Html.DisplayFor(model => model.Data)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.HoraInicio)</dt>
+        <dd>@Html.DisplayFor(model => model.HoraInicio)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.HoraFim)</dt>
+        <dd>@Html.DisplayFor(model => model.HoraFim)</dd>
+    </dl>
+    @using (Html.BeginForm("ConcluirReserva", "UserManage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.PostoId)
+        @Html.HiddenFor(model => model.Data)
+        @Html.HiddenFor(model => model.HoraInicio)
+        @Html.HiddenFor(model => model.HoraFim)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Reservar" class="btn btn-primary" />
+            </div>
+        </div>
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Pesquisar Posto", "PesquisarPostos")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

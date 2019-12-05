@@ -32,6 +32,10 @@
                             <li class="nav-item">@Html.ActionLink("Estações", "ListarEstacoes", "RedeProprietariaManage", null, new { @class = "nav-link" })</li>
                             <li class="nav-item">@Html.ActionLink("Postos", "ListarPostos", "RedeProprietariaManage", null, new { @class = "nav-link" })</li>
                         }
+                        else if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">@Html.ActionLink("Postos Pendentes", "ListarPostosPendentes", "AdminManage", null, new { @class = "nav-link" })</li>
+                        }
                     </ul>
                     @Html.Partial("_LoginPartial")
                 </div>

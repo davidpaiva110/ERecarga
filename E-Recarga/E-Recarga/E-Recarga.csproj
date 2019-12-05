@@ -170,6 +170,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminManageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RedeProprietariaManageController.cs" />
@@ -314,6 +315,9 @@
     <Content Include="Views\RedeProprietariaManage\RemoverEstacao.cshtml" />
     <Content Include="Views\UserManage\PesquisarPostos.cshtml" />
     <Content Include="Views\UserManage\ListaPostosDisponiveis.cshtml" />
+    <Content Include="Views\AdminManage\ListarPostosPendentes.cshtml" />
+    <Content Include="Views\AdminManage\AceitarPostoAdmin.cshtml" />
+    <Content Include="Views\AdminManage\RemoverPostoAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

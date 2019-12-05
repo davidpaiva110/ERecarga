@@ -320,3 +320,5 @@ C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.
 C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.pdb
 C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Migrations.ModeloReservasAtualizado.resources
 C:\Users\rafas\Desktop\TP_PWeb\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.csprojAssemblyReference.cache
+D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E-Recarga.csprojAssemblyReference.cache
+D:\Trabalhos\ERecarga\E-Recarga\E-Recarga\obj\Debug\E_Recarga.Migrations.ModeloReservasAtualizado.resources

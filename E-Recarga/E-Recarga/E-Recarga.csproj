@@ -323,6 +323,8 @@
     <Content Include="Views\AdminManage\ListarUtilizadoresAdmin.cshtml" />
     <Content Include="Views\AdminManage\DetalhesUtilizadoresAdmin.cshtml" />
     <Content Include="Views\AdminManage\RemoverUtilizadoresAdmin.cshtml" />
+    <Content Include="Views\RedeProprietariaManage\ListarReservas.cshtml" />
+    <Content Include="Views\RedeProprietariaManage\DetalhesReserva.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

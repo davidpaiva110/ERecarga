@@ -1,0 +1,81 @@
+﻿@model E_Recarga.Models.Reserva
+@{
+    ViewBag.Title = "DetalhesReserva";
+}
+
+<br />
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Detalhes da Reserva</h1>
+        <p class="lead text-muted mb-0">Informação referente à reserva.</p>
+    </div>
+</section>
+
+<br />
+
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ReservaId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ReservaId)
+        </dd>
+        <dt>
+            Nome do Utilizador
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Nome)
+        </dd>
+        <dt>
+            Número de Identificação Fiscal do Utilizador
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Nif)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HoraInicio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HoraInicio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HoraFim)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HoraFim)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Posto.PostoId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Posto.PostoId)
+        </dd>
+
+        <dt>
+            Estação
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Posto.Estacao.Localizacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Posto.Estacao.Cidade)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Posto.Estacao.Cidade)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Lista de Reservas", "ListarReservas")
+</p>

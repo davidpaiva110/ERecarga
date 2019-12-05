@@ -1,0 +1,60 @@
+﻿@model IEnumerable<E_Recarga.Models.Reserva>
+@{
+    ViewBag.Title = "ListarReservas";
+}
+
+<br />
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Reservas</h1>
+        <p class="lead text-muted mb-0">Lista de reservas da Rede Proprietária.</p>
+    </div>
+</section>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ReservaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoraInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoraFim)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reserva in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => reserva.ReservaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => reserva.PostoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => reserva.Data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => reserva.HoraInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => reserva.HoraFim)
+            </td>
+            <td>
+                @Html.ActionLink("Detalhes", "DetalhesReserva", new { id = reserva.ReservaId })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

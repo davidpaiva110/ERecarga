@@ -219,5 +219,29 @@ namespace E_Recarga.Controllers
             db.SaveChanges();
             return RedirectToAction("ListarEstacoes");
         }
+
+        public ActionResult ListarReservas()
+        {
+            List<Reserva> reservas = new List<Reserva>();
+            string userId = User.Identity.GetUserId();
+            var reservasdb = db.Reservas.Include(r => r.Posto.Estacao.RedeProprietaria).Where(r => r.Posto.Estacao.RedeProprietariaId == userId);
+            foreach(Reserva reserva in reservasdb)
+                reservas.Add(reserva);
+            return View(reservas.ToList());
+        }
+
+        public ActionResult DetalhesReserva(int id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Reserva reserva = db.Reservas.Include(r => r.Posto.Estacao.RedeProprietaria).Include(r => r.User).SingleOrDefault(r => r.ReservaId == id);
+            if (reserva == null)
+            {
+                return HttpNotFound();
+            }
+            return View(reserva);
+        }
     }
 }

@@ -1,7 +1,86 @@
-﻿
+﻿@model E_Recarga.Models.Posto
 @{
     ViewBag.Title = "RemoverPostoAdmin";
 }
 
-<h2>RemoverPostoAdmin</h2>
+<br />
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Remover Posto</h1>
+        <p class="lead text-muted mb-0">Remover o novo posto.</p>
+    </div>
+</section>
+
+@using (Html.BeginForm("RemoverPostoAdmin", "AdminManage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.PostoId)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PostoId)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Estado)
+            </dt>
+            <dd>
+                @if (Model.Estado == true)
+                {
+                    WriteLiteral("Ativo");
+                }
+                else
+                {
+                    WriteLiteral("Aguarda Aprovação");
+                }
+            </dd>
+            <hr />
+            <dt>
+                @Html.DisplayNameFor(model => model.EstacaoId)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EstacaoId)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Estacao.Cidade)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Estacao.Cidade)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Estacao.Localizacao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Estacao.Localizacao)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Estacao.Preco)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Estacao.Preco)€
+            </dd>
+
+        </dl>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Remover" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Lista de Postos Pendentes", "ListarPostosPendentes")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 

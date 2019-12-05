@@ -53,6 +53,29 @@ namespace E_Recarga.Controllers
             return View(posto);
         }
 
+        public ActionResult RemoverPostoAdmin(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Posto posto = db.Postos.Include(r => r.Estacao).Include(r => r.Estacao.RedeProprietaria).SingleOrDefault(r => r.PostoId == id);
+            if (posto == null)
+            {
+                return HttpNotFound();
+            }
+            return View(posto);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoverPostoAdmin(int id)
+        {
+            Posto posto = db.Postos.Find(id);
+            db.Postos.Remove(posto);
+            db.SaveChanges();
+            return RedirectToAction("ListarPostosPendentes");
+        }
 
     }
 }

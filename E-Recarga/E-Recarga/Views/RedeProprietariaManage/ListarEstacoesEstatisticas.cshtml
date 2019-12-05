@@ -26,6 +26,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.numeroReservas)
             </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -43,6 +44,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => estacao.numeroReservas)
+            </td>
+            <td>
+                @Html.ActionLink("Detalhes", "DetalhesEstatisticas", new { id = estacao.Estacao.EstacaoId })
             </td>
         </tr>
         }

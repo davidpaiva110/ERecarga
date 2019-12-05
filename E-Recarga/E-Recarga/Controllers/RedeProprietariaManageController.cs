@@ -281,5 +281,79 @@ namespace E_Recarga.Controllers
             }
                 return View(estatisticas.ToList());
         }
+
+        public ActionResult DetalhesEstatisticas(int? id)
+        {
+            List<Posto> postos = new List<Posto>();
+            List<double> tempoUtilizacao = new List<double>();
+            List<List<Reserva>> listaReservas = new List<List<Reserva>>();
+            SortedList<double, List<Posto>> hashmap = new SortedList<double, List<Posto>>();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Estacao estacao = db.Estacoes.Find(id);
+            if (estacao == null)
+            {
+                return HttpNotFound();
+            }
+            var postosdb = db.Postos.Where(r => r.EstacaoId == id); //Postos
+            foreach(Posto p in postosdb)
+            {
+                listaReservas.Add(new List<Reserva>());
+                postos.Add(p);
+            }
+            // Reservas de cada posto
+            for(int i = 0; i < postos.Count; i++)
+            {
+                int pid = postos[i].PostoId;
+                var reservasdb = db.Reservas.Where(r => r.PostoId == pid);
+                foreach (Reserva r in reservasdb)
+                {
+                    listaReservas[i].Add(r);
+                }
+            }
+            // Calcular o tempo de utilização de um posto
+            double tempo = 0.0;
+            foreach(List<Reserva> lista in listaReservas)
+            {
+                tempo = 0.0;
+                foreach(Reserva r in lista)
+                {
+                    double inicio = r.HoraInicio.Hour * 3600 + r.HoraInicio.Minute * 60;
+                    double fim = r.HoraFim.Hour * 3600 + r.HoraFim.Minute * 60;
+                    double dif = fim - inicio;
+                    tempo = tempo + dif;
+                }
+                tempoUtilizacao.Add(tempo/3600);
+            }
+
+            //Ordenar os postos com os respetivos tempos de utilização
+            for (int i = 0; i < tempoUtilizacao.Count; i++)
+            {
+                List<Posto> lista = new List<Posto>();
+                if (!hashmap.TryGetValue(tempoUtilizacao[i], out lista))
+                {
+                    lista = new List<Posto>(); 
+                    hashmap.Add(tempoUtilizacao[i], lista); //************************
+                }
+                hashmap[tempoUtilizacao[i]].Add(postos[i]);
+            }
+
+            List<EstatisticasDetalhes> estatisticas = new List<EstatisticasDetalhes>();
+            List<Posto> postosE = new List<Posto>();
+            for (int i = hashmap.Count - 1; i >= 0; i--)
+            {
+                List<Posto> aux;
+                aux = hashmap.Values[i];
+                foreach (Posto posto in aux)
+                {
+                    EstatisticasDetalhes e = new EstatisticasDetalhes(estacao, posto, hashmap.Keys[i]);
+                    estatisticas.Add(e);
+                }
+            }
+
+            return View(estatisticas.ToList());
+        }
     }
 }

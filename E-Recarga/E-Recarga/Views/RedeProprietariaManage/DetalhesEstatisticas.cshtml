@@ -1,0 +1,54 @@
+﻿@model IEnumerable<E_Recarga.Models.EstatisticasDetalhes>
+@{
+    ViewBag.Title = "DetalhesEstatisticas";
+}
+
+
+<br />
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Estatística Detalhada</h1>
+        <p class="lead text-muted mb-0">Informação relativa a uma estação e o tempo de utilização de cada posto.</p>
+    </div>
+</section>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.posto.PostoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estacao.Cidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estacao.Localizacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.temposUtilizacao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var estacao in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => estacao.posto.PostoId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => estacao.Estacao.Cidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => estacao.Estacao.Localizacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => estacao.temposUtilizacao) h
+                </td>
+                <td> </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

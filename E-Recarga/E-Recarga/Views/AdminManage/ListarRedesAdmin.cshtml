@@ -37,7 +37,7 @@
             </td>
             <td>
                 @Html.ActionLink("Detalhes", "DetalhesRedesAdmin", new { id = rede.RedeProprietariaId }) |
-                @Html.ActionLink("Remover", "RemoverRedesAdmin", new { id = rede.RedeProprietariaId })
+                @Html.ActionLink("Remover", "RemoverRedesAdmin", new { id = rede.RedeProprietariaId, nome = rede.Nome })
             </td>
         </tr>
         }

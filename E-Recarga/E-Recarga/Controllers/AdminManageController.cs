@@ -6,6 +6,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity; //necessário por causa das querys sql -> para reconhecer as entidades
 using System.Net;
+using System.Web.Security;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace E_Recarga.Controllers
 {
@@ -107,7 +110,104 @@ namespace E_Recarga.Controllers
             return View(estacoes.ToList());
         }
 
-        
+        public ActionResult RemoverRedesAdmin(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            RedeProprietaria rede = db.RedesProprietarias.Find(id);
+            if (rede == null)
+            {
+                return HttpNotFound();
+            }
+            return View(rede);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async System.Threading.Tasks.Task<ActionResult> RemoverRedesAdmin(string id, string nome)
+        {
+            ApplicationUserManager _userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); ;
+            RedeProprietaria rede = db.RedesProprietarias.Find(id);
+            List<Estacao> estacoes = new List<Estacao>();
+            List<List<Posto>> listaPostos = new List<List<Posto>>();
+            List<Reserva> reservas = new List<Reserva>();
+
+            var estadoesdb = db.Estacoes.Where(r => r.RedeProprietariaId.Contains(id)); // Estações da rede
+            foreach (Estacao est in estadoesdb)
+            {
+                estacoes.Add(est);
+            }
+
+            foreach(Estacao est in estacoes){
+                var postosdb = db.Postos.Where(p => p.EstacaoId == est.EstacaoId);  // Postos de uma estação
+                List<Posto> lista = new List<Posto>();
+                foreach(Posto posto in postosdb)
+                {
+                    lista.Add(posto);
+                }
+            }
+
+            foreach(List<Posto> lista in listaPostos)
+            {
+                foreach(Posto posto in lista)
+                {
+                    var reservadb = db.Reservas.Where(rv => rv.PostoId == posto.PostoId); // Reservas de um posto
+                    foreach (Reserva reserva in reservadb)
+                        reservas.Add(reserva);
+                }
+            }
+            
+            foreach(Reserva reserva in reservas)
+            {
+                db.Reservas.Remove(reserva);
+                db.SaveChanges();
+            }
+            foreach (List<Posto> lista in listaPostos)
+            {
+                foreach (Posto posto in lista)
+                {
+                    db.Postos.Remove(posto);
+                    db.SaveChanges();
+                }
+            }
+            foreach(Estacao estacao in estacoes)
+            {
+                db.Estacoes.Remove(estacao);
+                db.SaveChanges();
+            }
+
+            db.RedesProprietarias.Remove(rede);
+            db.SaveChanges();
+
+            var user = await _userManager.FindByIdAsync(id);
+            var logins = user.Logins;
+            var rolesForUser = await _userManager.GetRolesAsync(id);
+
+            using (var transaction = db.Database.BeginTransaction())
+            {
+                foreach (var login in logins.ToList())
+                {
+                    await _userManager.RemoveLoginAsync(login.UserId, new UserLoginInfo(login.LoginProvider, login.ProviderKey));
+                }
+
+                if (rolesForUser.Count() > 0)
+                {
+                    foreach (var item in rolesForUser.ToList())
+                    {
+                        // item should be the name of the role
+                        var result = await _userManager.RemoveFromRoleAsync(user.Id, item);
+                    }
+                }
+
+                await _userManager.DeleteAsync(user);
+                transaction.Commit();
+            }
+
+
+            return RedirectToAction("ListarRedesAdmin");
+        }
 
     }
 }

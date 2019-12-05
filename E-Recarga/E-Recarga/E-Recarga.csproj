@@ -186,11 +186,16 @@
     <Compile Include="Migrations\201912011641349_ModeloReservasAtualizado.Designer.cs">
       <DependentUpon>201912011641349_ModeloReservasAtualizado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912051751279_Tabela Mensagem.cs" />
+    <Compile Include="Migrations\201912051751279_Tabela Mensagem.Designer.cs">
+      <DependentUpon>201912051751279_Tabela Mensagem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Estacao.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Mensagem.cs" />
     <Compile Include="Models\Posto.cs" />
     <Compile Include="Models\RedeProprietaria.cs" />
     <Compile Include="Models\Reserva.cs" />
@@ -345,6 +350,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912011641349_ModeloReservasAtualizado.resx">
       <DependentUpon>201912011641349_ModeloReservasAtualizado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912051751279_Tabela Mensagem.resx">
+      <DependentUpon>201912051751279_Tabela Mensagem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

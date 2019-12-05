@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "E-Recarga";
 }
 
 <style>
@@ -17,13 +17,12 @@
         max-width: 100%;
     }
 </style>
-
 <section>
     <div class="container">
         <div class="jumbotron">
             <h1 class="display-3">E-Recarga</h1>
             <p class="lead">Reserva de Postos de Carregamento para Veículos Elétricos</p>
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">Postos de Carregamento Disponíveis &raquo;</a></p>
+            <p><a class="btn btn-primary btn-lg" href='@Url.Action("About")' role="button">Estações de Carregamento Existentes &raquo;</a></p>
         </div>
     </div>
 </section>
@@ -42,10 +41,10 @@
                     <h1 class="card-title pricing-card-title">0€ <small class="text-muted">/ mês</small></h1>
                     <ul class="list-unstyled mt-3 mb-4">
                         <li>Reserva de Postos de Carregamento</li>
-                        <li>Débito Direto dos Carregamentos</li>
+                        <li>Histórico das Reservas Efetuadas</li>
                         <li>Mais Fácil e Cómodo</li>
                     </ul>
-                    <button type="button" class="btn btn-lg btn-block btn-primary">Registe-se</button>
+                    <a class="btn btn-primary btn-lg btn-block" href='@Url.Action("Register", "Account")' role="button">Registe-se!</a>
                 </div>
             </div>
             <div class="card mb-6 box-shadow">
@@ -55,11 +54,11 @@
                 <div class="card-body">
                     <h1 class="card-title pricing-card-title">Profissional</h1>
                     <ul class="list-unstyled mt-3 mb-4">
-                        <li>Divulgação dos Postos de Carregamento</li>
-                        <li>Vasta Comunidade de Utilizadores</li>
+                        <li>Divulgação das Estações e Postos de Carregamento</li>
+                        <li>Resumo de Reservas Efetuadas</li>
                         <li>Acesso a Estatísticas de Utilização</li>
                     </ul>
-                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Contacte-nos</button>
+                    <a class="btn btn-lg btn-block btn-outline-primary" href='@Url.Action("Register", "Account")' role="button">Registe-se!</a>
                 </div>
             </div>
         </div>

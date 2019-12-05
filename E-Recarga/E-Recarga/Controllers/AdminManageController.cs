@@ -128,7 +128,7 @@ namespace E_Recarga.Controllers
         [ValidateAntiForgeryToken]
         public async System.Threading.Tasks.Task<ActionResult> RemoverRedesAdmin(string id, string nome)
         {
-            ApplicationUserManager _userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); 
+            ApplicationUserManager _userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             RedeProprietaria rede = db.RedesProprietarias.Find(id);
             List<Estacao> estacoes = new List<Estacao>();
             List<List<Posto>> listaPostos = new List<List<Posto>>();
@@ -140,26 +140,27 @@ namespace E_Recarga.Controllers
                 estacoes.Add(est);
             }
 
-            foreach(Estacao est in estacoes){
+            foreach (Estacao est in estacoes)
+            {
                 var postosdb = db.Postos.Where(p => p.EstacaoId == est.EstacaoId);  // Postos de uma estação
                 List<Posto> lista = new List<Posto>();
-                foreach(Posto posto in postosdb)
+                foreach (Posto posto in postosdb)
                 {
                     lista.Add(posto);
                 }
             }
 
-            foreach(List<Posto> lista in listaPostos)
+            foreach (List<Posto> lista in listaPostos)
             {
-                foreach(Posto posto in lista)
+                foreach (Posto posto in lista)
                 {
                     var reservadb = db.Reservas.Where(rv => rv.PostoId == posto.PostoId); // Reservas de um posto
                     foreach (Reserva reserva in reservadb)
                         reservas.Add(reserva);
                 }
             }
-            
-            foreach(Reserva reserva in reservas)
+
+            foreach (Reserva reserva in reservas)
             {
                 db.Reservas.Remove(reserva);
                 db.SaveChanges();
@@ -172,7 +173,7 @@ namespace E_Recarga.Controllers
                     db.SaveChanges();
                 }
             }
-            foreach(Estacao estacao in estacoes)
+            foreach (Estacao estacao in estacoes)
             {
                 db.Estacoes.Remove(estacao);
                 db.SaveChanges();
@@ -297,5 +298,48 @@ namespace E_Recarga.Controllers
             return RedirectToAction("ListarUtilizadoresAdmin");
         }
 
+        public ActionResult ListarMensagens()
+        {
+            var mensagens = db.Mensagens.OrderByDescending(c => c.MensagemId);
+            return View(mensagens.ToList());
+        }
+
+        public ActionResult DetalhesMensagem(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Mensagem mensagem = db.Mensagens.Find(id);
+            if (mensagem == null)
+            {
+                return HttpNotFound();
+            }
+            return View(mensagem);
+        }
+
+        public ActionResult RemoverMensagem(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Mensagem mensagem = db.Mensagens.Find(id);
+            if (mensagem == null)
+            {
+                return HttpNotFound();
+            }
+            return View(mensagem);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoverMensagem(int id)
+        {
+            Mensagem mensagem = db.Mensagens.Find(id);
+            db.Mensagens.Remove(mensagem);
+            db.SaveChanges();
+            return RedirectToAction("ListarMensagens");
+        }
     }
 }

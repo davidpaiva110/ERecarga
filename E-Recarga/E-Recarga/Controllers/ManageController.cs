@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using E_Recarga.Models;
+using System.Data.Entity;
 
 namespace E_Recarga.Controllers
 {
@@ -15,6 +16,7 @@ namespace E_Recarga.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public ManageController()
         {
@@ -333,7 +335,73 @@ namespace E_Recarga.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        //
+        // GET: /Manage/UserAccountDetails
+        public ActionResult UserAccountDetails()
+        {
+            string userId = User.Identity.GetUserId();
+            User user = db.Users.Find(userId);
+            ViewBag.email = User.Identity.GetUserName();
+            return View(user);
+        }
+
+        //
+        // GET: /Manage/RedeProprietariaAccountDetails
+        public ActionResult RedeProprietariaAccountDetails()
+        {
+            string userId = User.Identity.GetUserId();
+            RedeProprietaria rede = db.RedesProprietarias.Find(userId);
+            ViewBag.email = User.Identity.GetUserName();
+            return View(rede);
+        }
+
+        //
+        // GET: /Manage/UserAccountEdit
+        public ActionResult UserAccountEdit()
+        {
+            string userId = User.Identity.GetUserId();
+            User user = db.Users.Find(userId);
+            ViewBag.email = User.Identity.GetUserName();
+            return View(user);
+        }
+
+        //
+        // GET: /Manage/RedeProprietariaAccountEdit
+        public ActionResult RedeProprietariaAccountEdit()
+        {
+            string userId = User.Identity.GetUserId();
+            RedeProprietaria rede = db.RedesProprietarias.Find(userId);
+            ViewBag.email = User.Identity.GetUserName();
+            return View(rede);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UserAccountEdit([Bind(Include = "UserId,Nome,Nif,NumeroCC,TitularCC,CCV")] User user)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("UserAccountDetails");
+            }
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RedeProprietariaAccountEdit([Bind(Include = "RedeProprietariaId,Nome,Nif,NumeroCC,TitularCC,CCV")] RedeProprietaria rede)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(rede).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("RedeProprietariaAccountDetails");
+            }
+            return View(rede);
+        }
+
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 

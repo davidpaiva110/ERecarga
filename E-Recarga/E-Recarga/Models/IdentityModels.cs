@@ -37,6 +37,7 @@ namespace E_Recarga.Models
         public DbSet<Estacao> Estacoes { get; set; }
         public DbSet<Posto> Postos { get; set; }
         public DbSet<Reserva> Reservas { get; set; }
+        public DbSet<Mensagem> Mensagens { get; set; }
 
         public class ApplicationRoleManager : RoleManager<IdentityRole>
         {

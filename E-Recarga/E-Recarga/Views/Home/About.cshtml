@@ -1,7 +1,8 @@
-﻿@{
-    ViewBag.Title = "About";
+﻿@model IEnumerable<E_Recarga.Models.Estacao>
+@{
+    ViewBag.Title = "Sobre Nós";
 }
-
+<br />
 <section class="jumbotron text-center">
     <div class="container">
         <h1 class="jumbotron-heading">Sobre Nós</h1>
@@ -23,44 +24,45 @@
         </p>
     </div>
 </section>
-
 <div class="container">
     <div class="row">
         <h2 class="font-weight-bold">Estações de Postos de Carregamento Existentes</h2>
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Rede Proprietária</th>
-                    <th scope="col">Cidade</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Custo por Carregamento</th>
-                    <th scope="col">Número de Postos de Carregamento</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RedeProprietaria.Nome)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cidade)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Localizacao)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Preco)
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Tesla</td>
-                    <td>Coimbra</td>
-                    <td>Estação de Comboios Coimbra-B</td>
-                    <td>0,52€</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>MOBI.E</td>
-                    <td>Coimbra</td>
-                    <td>Fórum Coimbra</td>
-                    <td>0,47€</td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td>MOBI.E</td>
-                    <td>Lisboa</td>
-                    <td>Centro Comercial Colombo</td>
-                    <td>0,67€</td>
-                    <td>18</td>
-                </tr>
+                @foreach (var estacao in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => estacao.RedeProprietaria.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => estacao.Cidade)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => estacao.Localizacao)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => estacao.Preco)€
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
 </div>
-

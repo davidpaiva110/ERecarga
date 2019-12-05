@@ -14,9 +14,8 @@
 <div>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">Password: </dt>
-        <dd class="col-sm-10">
-            [
+        <dt class="col-sm-3">Password: </dt>
+        <dd class="col-sm-9">
             @if (Model.HasPassword)
             {
                 @Html.ActionLink("Alterar Password", "ChangePassword")
@@ -25,7 +24,28 @@
             {
                 @Html.ActionLink("Criar Password", "SetPassword")
             }
-            ]
+        </dd>
+        <dt class="col-sm-3">Informações da Conta: </dt>
+        <dd class="col-sm-9">
+            @if (User.IsInRole("Rede Proprietaria"))
+            {
+                @Html.ActionLink("Detalhes", "RedeProprietariaAccountDetails")
+            }
+            else if (User.IsInRole("Utilizador"))
+            {
+                @Html.ActionLink("Detalhes", "UserAccountDetails")
+            }
+        </dd>
+        <dt class="col-sm-3">Editar Informações: </dt>
+        <dd class="col-sm-9">
+            @if (User.IsInRole("Rede Proprietaria"))
+            {
+                @Html.ActionLink("Editar", "RedeProprietariaAccountEdit")
+            }
+            else if (User.IsInRole("Utilizador"))
+            {
+                @Html.ActionLink("Editar", "UserAccountEdit")
+            }
         </dd>
         @* <dt>External Logins:</dt>
         <dd>

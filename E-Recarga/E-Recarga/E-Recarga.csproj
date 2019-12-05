@@ -320,6 +320,10 @@
     <Content Include="Views\UserManage\HistoricoReservas.cshtml" />
     <Content Include="Views\UserManage\DetalhesReserva.cshtml" />
     <Content Include="Views\UserManage\CancelarReserva.cshtml" />
+    <Content Include="Views\Manage\RedeProprietariaAccountDetails.cshtml" />
+    <Content Include="Views\Manage\UserAccountDetails.cshtml" />
+    <Content Include="Views\Manage\UserAccountEdit.cshtml" />
+    <Content Include="Views\Manage\RedeProprietariaAccountEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -243,5 +243,43 @@ namespace E_Recarga.Controllers
             }
             return View(reserva);
         }
+
+        public ActionResult ListarEstacoesEstatisticas()
+        {
+            List<Estacao> estacoes = new List<Estacao>();
+            SortedList<int, List<Estacao>> hashmap = new SortedList<int, List<Estacao>>();
+
+            var estacoesdb = db.Estacoes;
+            foreach (Estacao estacao in estacoesdb)
+                estacoes.Add(estacao);
+            //Ordenação com a SortedList
+            foreach (Estacao estacao in estacoes)
+            {
+                List<Reserva> lista = new List<Reserva>();
+                List<Estacao> listaEstacao = new List<Estacao>();
+                var reservasdb = db.Reservas.Where(r => r.Posto.EstacaoId == estacao.EstacaoId);
+                foreach (Reserva r in reservasdb)
+                    lista.Add(r);
+                //Ver se já existe alguma estação com o mesmo numero de reservas
+                if (!hashmap.TryGetValue(lista.Count(), out listaEstacao))
+                {
+                    listaEstacao = new List<Estacao>();
+                    hashmap.Add(lista.Count(), listaEstacao);
+                }
+                hashmap[lista.Count()].Add(estacao);
+            }
+            List<Estatisticas> estatisticas = new List<Estatisticas>();
+            for(int i= hashmap.Count-1; i >=0 ; i--)
+            {
+                List<Estacao> aux;
+                aux = hashmap.Values[i];
+                foreach(Estacao estacao in aux)
+                {
+                    Estatisticas e = new Estatisticas(hashmap.Keys[i], estacao);
+                    estatisticas.Add(e);
+                }
+            }
+                return View(estatisticas.ToList());
+        }
     }
 }

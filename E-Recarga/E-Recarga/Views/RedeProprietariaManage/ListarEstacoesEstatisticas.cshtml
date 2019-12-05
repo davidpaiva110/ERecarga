@@ -1,0 +1,50 @@
+﻿@model IEnumerable<E_Recarga.Models.Estatisticas>
+@{
+    ViewBag.Title = "ListarEstacoesEstatisticas";
+}
+
+<br />
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Estatísticas</h1>
+        <p class="lead text-muted mb-0">Lista de estações oredenadas por oredem decrescente de afluência.</p>
+    </div>
+</section>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Estacao.EstacaoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estacao.Cidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estacao.Localizacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.numeroReservas)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var estacao in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => estacao.Estacao.EstacaoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => estacao.Estacao.Cidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => estacao.Estacao.Localizacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => estacao.numeroReservas)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

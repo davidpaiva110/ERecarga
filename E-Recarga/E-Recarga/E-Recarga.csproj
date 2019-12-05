@@ -189,6 +189,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Estacao.cs" />
+    <Compile Include="Models\Estatisticas.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Posto.cs" />
@@ -325,6 +326,7 @@
     <Content Include="Views\AdminManage\RemoverUtilizadoresAdmin.cshtml" />
     <Content Include="Views\RedeProprietariaManage\ListarReservas.cshtml" />
     <Content Include="Views\RedeProprietariaManage\DetalhesReserva.cshtml" />
+    <Content Include="Views\RedeProprietariaManage\ListarEstacoesEstatisticas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -128,7 +128,7 @@ namespace E_Recarga.Controllers
         [ValidateAntiForgeryToken]
         public async System.Threading.Tasks.Task<ActionResult> RemoverRedesAdmin(string id, string nome)
         {
-            ApplicationUserManager _userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); ;
+            ApplicationUserManager _userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); 
             RedeProprietaria rede = db.RedesProprietarias.Find(id);
             List<Estacao> estacoes = new List<Estacao>();
             List<List<Posto>> listaPostos = new List<List<Posto>>();
@@ -207,6 +207,94 @@ namespace E_Recarga.Controllers
 
 
             return RedirectToAction("ListarRedesAdmin");
+        }
+
+        public ActionResult ListarUtilizadoresAdmin()
+        {
+            var usersdb = db.Users;
+            List<User> utilizadores = new List<User>();
+            foreach (User user in usersdb)
+                utilizadores.Add(user);
+            return View(utilizadores.ToList());
+        }
+
+        public ActionResult DetalhesUtilizadoresAdmin(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            User user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.user = user;
+            List<Reserva> reservas = new List<Reserva>();
+            var reservasdb = db.Reservas.Include(r => r.Posto).Include(r => r.Posto.Estacao.RedeProprietaria).Where(r => r.UserId == id);
+            foreach (Reserva reserva in reservasdb)
+                reservas.Add(reserva);
+
+            return View(reservas.ToList());
+        }
+
+        public ActionResult RemoverUtilizadoresAdmin(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            User user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async System.Threading.Tasks.Task<ActionResult> RemoverUtilizadoresAdmin(string id, string nome)
+        {
+            ApplicationUserManager _userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            User userE = db.Users.Find(id);
+            List<Reserva> reservas = new List<Reserva>();
+            var reservasdb = db.Reservas.Where(r => r.UserId == id);
+            foreach (Reserva reserva in reservasdb)
+                reservas.Add(reserva);
+            foreach (Reserva reserva in reservas)
+            {
+                db.Reservas.Remove(reserva);
+                db.SaveChanges();
+            }
+            db.Users.Remove(userE);
+            db.SaveChanges();
+
+            var user = await _userManager.FindByIdAsync(id);
+            var logins = user.Logins;
+            var rolesForUser = await _userManager.GetRolesAsync(id);
+
+            using (var transaction = db.Database.BeginTransaction())
+            {
+                foreach (var login in logins.ToList())
+                {
+                    await _userManager.RemoveLoginAsync(login.UserId, new UserLoginInfo(login.LoginProvider, login.ProviderKey));
+                }
+
+                if (rolesForUser.Count() > 0)
+                {
+                    foreach (var item in rolesForUser.ToList())
+                    {
+                        // item should be the name of the role
+                        var result = await _userManager.RemoveFromRoleAsync(user.Id, item);
+                    }
+                }
+
+                await _userManager.DeleteAsync(user);
+                transaction.Commit();
+            }
+
+            return RedirectToAction("ListarUtilizadoresAdmin");
         }
 
     }

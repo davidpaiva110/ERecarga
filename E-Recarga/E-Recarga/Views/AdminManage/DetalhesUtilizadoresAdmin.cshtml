@@ -1,0 +1,92 @@
+﻿@model IEnumerable<E_Recarga.Models.Reserva>
+@{
+    ViewBag.Title = "DetalhesUtilizadoresAdmin";
+}
+
+<br />
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Detalhes do Utilizador</h1>
+        <p class="lead text-muted mb-0">Informação relativa ao utilizador da ERecarga.</p>
+    </div>
+</section>
+
+<div>
+    <h4>Utilizador</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nome
+        </dt>
+
+        <dd>
+            @ViewBag.user.Nome
+        </dd>
+
+        <dt>
+            Número de Identificação Fiscal
+        </dt>
+
+        <dd>
+            @ViewBag.user.Nif
+        </dd>
+    </dl>
+</div>
+
+<br />
+<h4>Reservas do Utilizador @ViewBag.user.Nome</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ReservaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoraInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoraFim)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posto)
+            </th>
+            <th>
+                Estação
+            </th>
+            <th>
+               Rede Proprietária
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var estacao in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => estacao.ReservaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => estacao.Data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => estacao.HoraInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => estacao.HoraFim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => estacao.Posto.PostoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => estacao.Posto.Estacao.Localizacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => estacao.Posto.Estacao.RedeProprietaria.Nome)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

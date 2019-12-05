@@ -1,0 +1,45 @@
+﻿@model IEnumerable<E_Recarga.Models.User>
+@{
+    ViewBag.Title = "ListarUtilizadoresAdmin";
+}
+
+<br />
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Utilizadores</h1>
+        <p class="lead text-muted mb-0">Lista de Utilizadores da ERecarga.</p>
+    </div>
+</section>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nif)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => user.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => user.Nif)
+                </td>
+                <td>
+                    @Html.ActionLink("Detalhes", "DetalhesUtilizadoresAdmin", new { id = user.UserId}) |
+                    @Html.ActionLink("Remover", "RemoverUtilizadoresAdmin", new { id = user.UserId, nome = user.Nome }) 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

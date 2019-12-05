@@ -48,5 +48,9 @@ namespace E_Recarga.Models
             TitularCC = titularCC;
             CCV = cCV;
         }
+
+        public User()
+        {
+        }
     }
 }

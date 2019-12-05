@@ -1,0 +1,45 @@
+﻿@model E_Recarga.Models.User
+@{
+    ViewBag.Title = "RemoverUtilizadoresAdmin";
+}
+
+<br />
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Remover Utilizador</h1>
+        <p class="lead text-muted mb-0">Remover um utilizador e toda a sua informação da ERecarga.</p>
+    </div>
+</section>
+
+<div>
+    <h4>Utilizador</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            Número de Identificação Fiscal
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nif)
+        </dd>
+    </dl>
+</div>
+
+@using (Html.BeginForm("RemoverUtilizadoresAdmin", "AdminManage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-actions no-color">
+        <input type="submit" value="Remover" class="btn btn-danger" /> |
+        @Html.ActionLink("Lista de Utilizadores", "ListarUtilizadoresAdmin")
+    </div>
+}
+

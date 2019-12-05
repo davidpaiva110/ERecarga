@@ -19,7 +19,6 @@
 
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav  mr-auto">
-                        <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</li>
                         <li class="nav-item">@Html.ActionLink("Sobre Nós", "About", "Home", null, new { @class = "nav-link" })</li>
                         <li class="nav-item">@Html.ActionLink("Contactos", "Contact", "Home", null, new { @class = "nav-link" })</li>
                         @if (Request.IsAuthenticated && User.IsInRole("Utilizador"))
@@ -35,7 +34,8 @@
                         else if (Request.IsAuthenticated && User.IsInRole("Admin"))
                         {
                             <li class="nav-item">@Html.ActionLink("Postos Pendentes", "ListarPostosPendentes", "AdminManage", null, new { @class = "nav-link" })</li>
-                            <li class="nav-item">@Html.ActionLink("Redes Propriatárias", "ListarRedesAdmin", "AdminManage", null, new { @class = "nav-link" })</li>
+                            <li class="nav-item">@Html.ActionLink("Redes Proprietárias", "ListarRedesAdmin", "AdminManage", null, new { @class = "nav-link" })</li>
+                            <li class="nav-item">@Html.ActionLink("Utilizadores", "ListarUtilizadoresAdmin", "AdminManage", null, new { @class = "nav-link" })</li>
                         }
                     </ul>
                     @Html.Partial("_LoginPartial")

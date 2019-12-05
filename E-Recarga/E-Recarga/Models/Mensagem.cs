@@ -12,12 +12,12 @@ namespace E_Recarga.Models
         [Display(Name = "ID Mensagem")]
         public int MensagemId { get; set; }
         [Required(ErrorMessage = "Tem de especificar o nome do remetente!")]
-        [Display(Name = "Nome do Remetente")]
+        [Display(Name = "Nome")]
         [DataType(DataType.Text)]
         public string Nome { get; set; }
         [Required(ErrorMessage = "Tem de especificar o email do remetente!")]
         [Display(Name = "Email")]
-        [DataType(DataType.Text)]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         [Required(ErrorMessage = "Tem de especificar a mensagem do remetente!")]
         [Display(Name = "Mensagem")]

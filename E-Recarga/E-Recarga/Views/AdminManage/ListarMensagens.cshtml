@@ -1,0 +1,51 @@
+﻿@model IEnumerable<E_Recarga.Models.Mensagem>
+@{
+    ViewBag.Title = "ListarMensagens";
+}
+
+<br />
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Mensagens Recebidas</h1>
+        <p class="lead text-muted mb-0">Lista de dúvidas ou sugestões recebidas através da página de Contactos</p>
+    </div>
+</section>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MensagemId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MensagemId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.ActionLink("Detalhes", "DetalhesMensagem", new { id = item.MensagemId }) |
+                    @Html.ActionLink("Remover", "RemoverMensagem", new { id = item.MensagemId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

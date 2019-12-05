@@ -209,5 +209,48 @@ namespace E_Recarga.Controllers
             return RedirectToAction("ListarRedesAdmin");
         }
 
+        public ActionResult ListarMensagens()
+        {
+            var mensagens = db.Mensagens.OrderByDescending(c => c.MensagemId);
+            return View(mensagens.ToList());
+        }
+
+        public ActionResult DetalhesMensagem(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Mensagem mensagem = db.Mensagens.Find(id);
+            if (mensagem == null)
+            {
+                return HttpNotFound();
+            }
+            return View(mensagem);
+        }
+
+        public ActionResult RemoverMensagem(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Mensagem mensagem = db.Mensagens.Find(id);
+            if (mensagem == null)
+            {
+                return HttpNotFound();
+            }
+            return View(mensagem);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoverMensagem(int id)
+        {
+            Mensagem mensagem = db.Mensagens.Find(id);
+            db.Mensagens.Remove(mensagem);
+            db.SaveChanges();
+            return RedirectToAction("ListarMensagens");
+        }
     }
 }

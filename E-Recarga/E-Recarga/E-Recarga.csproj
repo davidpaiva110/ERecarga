@@ -329,6 +329,9 @@
     <Content Include="Views\Manage\UserAccountDetails.cshtml" />
     <Content Include="Views\Manage\UserAccountEdit.cshtml" />
     <Content Include="Views\Manage\RedeProprietariaAccountEdit.cshtml" />
+    <Content Include="Views\AdminManage\ListarMensagens.cshtml" />
+    <Content Include="Views\AdminManage\DetalhesMensagem.cshtml" />
+    <Content Include="Views\AdminManage\RemoverMensagem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

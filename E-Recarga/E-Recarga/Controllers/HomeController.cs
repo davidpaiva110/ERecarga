@@ -35,8 +35,20 @@ namespace E_Recarga.Controllers
 
         public ActionResult Contact()
         {
-
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Contact([Bind(Include = "Nome, Email, Message")] Mensagem mensagem)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Mensagens.Add(mensagem);
+                db.SaveChanges();
+                return RedirectToAction("Contact");
+            }
+            return View(mensagem);
         }
     }
 }

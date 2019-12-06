@@ -25,7 +25,11 @@
                 @Html.ActionLink("Criar Password", "SetPassword")
             }
         </dd>
-        <dt class="col-sm-3">Informações da Conta: </dt>
+        <dt class="col-sm-3">
+            @if (Request.IsAuthenticated && (User.IsInRole("Utilizador") || User.IsInRole("Rede Proprietaria"))) {
+                WriteLiteral("Informações da Conta:");
+             }
+        </dt>
         <dd class="col-sm-9">
             @if (User.IsInRole("Rede Proprietaria"))
             {
@@ -36,7 +40,12 @@
                 @Html.ActionLink("Detalhes", "UserAccountDetails")
             }
         </dd>
-        <dt class="col-sm-3">Editar Informações: </dt>
+        <dt class="col-sm-3">
+            @if (Request.IsAuthenticated && (User.IsInRole("Utilizador") || User.IsInRole("Rede Proprietaria")))
+            {
+                WriteLiteral("Editar Informações:");
+            }
+        </dt>
         <dd class="col-sm-9">
             @if (User.IsInRole("Rede Proprietaria"))
             {

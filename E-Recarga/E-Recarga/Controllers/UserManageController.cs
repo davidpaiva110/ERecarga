@@ -46,10 +46,9 @@ namespace E_Recarga.Controllers
 
         public ActionResult ListaPostosDisponiveis(string cidade, DateTime data, DateTime horaInicio, DateTime horaFim)
         {
-            // FALTA VERIFICAR SE O ESTADO DO POSTO É ATIVO
             List<Posto> postosDisponiveis = new List<Posto>();
             List<Posto> postosToView = new List<Posto>();
-            var postos = db.Postos.Include(r => r.Estacao).Include(r => r.Estacao.RedeProprietaria).Where(r => r.Estacao.Cidade.ToLower().Contains(cidade.ToLower()));
+            var postos = db.Postos.Include(r => r.Estacao).Include(r => r.Estacao.RedeProprietaria).Where(r => r.Estacao.Cidade.ToLower().Contains(cidade.ToLower()) && r.Estado==true);
             foreach (Posto posto in postos)
             {
                 postosDisponiveis.Add(posto);

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<E_Recarga.Models.EstatisticasAdmin>
+@{
+    ViewBag.Title = "EstatisticasAdmin";
+}
+
+<br />
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Estatísticas</h1>
+        <p class="lead text-muted mb-0">Lista de redes proprietária ordenadas por ordem decrescente do número de reservas.</p>
+    </div>
+</section>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RedeProprietaria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroReservas)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var estacao in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => estacao.RedeProprietaria.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => estacao.NumeroReservas)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

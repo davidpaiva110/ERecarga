@@ -340,7 +340,6 @@ namespace E_Recarga.Controllers
                 hashmap[tempoUtilizacao[i]].Add(postos[i]);
             }
             List<EstatisticasDetalhes> estatisticas = new List<EstatisticasDetalhes>();
-            List<Posto> postosE = new List<Posto>();
             for (int i = hashmap.Count - 1; i >= 0; i--)
             {
                 List<Posto> aux;

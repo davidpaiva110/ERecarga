@@ -341,5 +341,55 @@ namespace E_Recarga.Controllers
             db.SaveChanges();
             return RedirectToAction("ListarMensagens");
         }
+
+        public ActionResult EstatisticasAdmin()
+        {
+            SortedList<int, List<RedeProprietaria>> hashmap = new SortedList<int, List<RedeProprietaria>>();
+            List<RedeProprietaria> redes = new List<RedeProprietaria>();
+            List<List<Reserva>> listaReservas = new List<List<Reserva>>();
+
+            // Redes Proprietárias
+            var redesdb = db.RedesProprietarias;
+            foreach(RedeProprietaria rede in redesdb)
+            {
+                redes.Add(rede);
+                listaReservas.Add(new List<Reserva>());
+            }
+            // Reservas de cada rede proprietária
+            for(int i=0; i<redes.Count; i++)
+            {
+                string idRede = redes[i].RedeProprietariaId;
+                var reservasdb = db.Reservas.Where(r => r.Posto.Estacao.RedeProprietariaId == idRede);
+                foreach (Reserva r in reservasdb)
+                {
+                    listaReservas[i].Add(r);
+                }
+            }
+            // Ordenar as redes propiretárias com os respetivos numeros de reserva
+            for(int i=0; i<redes.Count; i++)
+            {
+                List<RedeProprietaria> lista = new List<RedeProprietaria>();
+                if(!hashmap.TryGetValue(listaReservas[i].Count, out lista)) // Se não existir nenhuma rede com aquele numero de 
+                {
+                    lista = new List<RedeProprietaria>();
+                    hashmap.Add(listaReservas[i].Count, lista);
+                }
+                hashmap[listaReservas[i].Count].Add(redes[i]);
+            }
+            List<EstatisticasAdmin> estatisticas = new List<EstatisticasAdmin>();
+            for(int i= hashmap.Count-1; i>=0; i--)
+            {
+                List<RedeProprietaria> aux;
+                aux = hashmap.Values[i];
+                foreach(RedeProprietaria rede in aux)
+                {
+                    EstatisticasAdmin e = new EstatisticasAdmin(rede, hashmap.Keys[i]);
+                    estatisticas.Add(e);
+                }
+            }
+            return View(estatisticas.ToList());
+        }
+
+
     }
 }

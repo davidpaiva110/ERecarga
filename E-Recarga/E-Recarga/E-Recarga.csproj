@@ -194,6 +194,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Estacao.cs" />
     <Compile Include="Models\Estatisticas.cs" />
+    <Compile Include="Models\EstatisticasAdmin.cs" />
     <Compile Include="Models\EstatisticasDetalhes.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -341,6 +342,7 @@
     <Content Include="Views\AdminManage\ListarMensagens.cshtml" />
     <Content Include="Views\AdminManage\DetalhesMensagem.cshtml" />
     <Content Include="Views\AdminManage\RemoverMensagem.cshtml" />
+    <Content Include="Views\AdminManage\EstatisticasAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

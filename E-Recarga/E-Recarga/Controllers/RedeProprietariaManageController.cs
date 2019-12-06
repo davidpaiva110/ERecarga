@@ -75,12 +75,14 @@ namespace E_Recarga.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("ListarPostos");
             }
             Posto posto = db.Postos.Find(id);
             if (posto == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("ListarPostos");
             }
             string userId = User.Identity.GetUserId();
             ViewBag.Estacoes = new SelectList(db.Estacoes.Where(u => u.RedeProprietariaId.Contains(userId)).ToList(), "EstacaoId", "EstacaoId");
@@ -91,12 +93,14 @@ namespace E_Recarga.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("ListarEstacoes");
             }
             Estacao estacao = db.Estacoes.Find(id);
             if (estacao == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("ListarEstacoes");
             }
             return View(estacao);
         }
@@ -105,12 +109,14 @@ namespace E_Recarga.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("ListarPostos");
             }
             Posto posto = db.Postos.Include(r => r.Estacao).SingleOrDefault(r => r.PostoId==id);
             if (posto == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("ListarPostos");
             }
             return View(posto);
         }
@@ -120,12 +126,15 @@ namespace E_Recarga.Controllers
 
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("ListarEstacoes");
+
             }
             Estacao estacao = db.Estacoes.Find(id);
             if (estacao == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("ListarEstacoes");
             }
             return View(estacao);
         }
@@ -134,12 +143,14 @@ namespace E_Recarga.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("ListarPostos");
             }
             Posto posto = db.Postos.Include(r => r.Estacao).SingleOrDefault(r => r.PostoId == id);
             if (posto == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("ListarPostos");
             }
             return View(posto);
         }
@@ -148,12 +159,14 @@ namespace E_Recarga.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("ListarEstacoes");
             }
             Estacao estacao = db.Estacoes.Find(id);
             if (estacao == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("ListarEstacoes");
             }
             return View(estacao);
         }
@@ -230,16 +243,18 @@ namespace E_Recarga.Controllers
             return View(reservas.ToList());
         }
 
-        public ActionResult DetalhesReserva(int id)
+        public ActionResult DetalhesReserva(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("ListarReservas");
             }
             Reserva reserva = db.Reservas.Include(r => r.Posto.Estacao.RedeProprietaria).Include(r => r.User).SingleOrDefault(r => r.ReservaId == id);
             if (reserva == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("ListarReservas");
             }
             return View(reserva);
         }
@@ -290,12 +305,14 @@ namespace E_Recarga.Controllers
             SortedList<double, List<Posto>> hashmap = new SortedList<double, List<Posto>>();
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("ListarEstacoesEstatisticas");
             }
             Estacao estacao = db.Estacoes.Find(id);
             if (estacao == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("ListarEstacoesEstatisticas");
             }
             var postosdb = db.Postos.Where(r => r.EstacaoId == id); //Postos
             foreach(Posto p in postosdb)

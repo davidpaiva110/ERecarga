@@ -32,12 +32,14 @@ namespace E_Recarga.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("ListarPostosPendentes");
             }
             Posto posto = db.Postos.Include(r => r.Estacao).Include(r => r.Estacao.RedeProprietaria).SingleOrDefault(r => r.PostoId == id);
             if (posto == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("ListarPostosPendentes");
             }
             return View(posto);
         }
@@ -60,12 +62,14 @@ namespace E_Recarga.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("ListarPostosPendentes");
             }
             Posto posto = db.Postos.Include(r => r.Estacao).Include(r => r.Estacao.RedeProprietaria).SingleOrDefault(r => r.PostoId == id);
             if (posto == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("ListarPostosPendentes");
             }
             return View(posto);
         }
@@ -92,14 +96,16 @@ namespace E_Recarga.Controllers
 
         public ActionResult DetalhesRedesAdmin(string id)
         {
-            if (id == null)
+            if (String.IsNullOrEmpty(id))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("ListarRedesAdmin");
             }
             RedeProprietaria rede = db.RedesProprietarias.Find(id);
             if (rede == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("ListarRedesAdmin");
             }
             ViewBag.rede = rede;
             List<Estacao> estacoes = new List<Estacao>();
@@ -112,14 +118,16 @@ namespace E_Recarga.Controllers
 
         public ActionResult RemoverRedesAdmin(string id)
         {
-            if (id == null)
+            if (String.IsNullOrEmpty(id))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("ListarRedesAdmin");
             }
             RedeProprietaria rede = db.RedesProprietarias.Find(id);
             if (rede == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("ListarRedesAdmin");
             }
             return View(rede);
         }
@@ -221,14 +229,16 @@ namespace E_Recarga.Controllers
 
         public ActionResult DetalhesUtilizadoresAdmin(string id)
         {
-            if (id == null)
+            if (String.IsNullOrEmpty(id))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("ListarUtilizadoresAdmin");
             }
             User user = db.Users.Find(id);
             if (user == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("ListarUtilizadoresAdmin");
             }
             ViewBag.user = user;
             List<Reserva> reservas = new List<Reserva>();
@@ -241,14 +251,16 @@ namespace E_Recarga.Controllers
 
         public ActionResult RemoverUtilizadoresAdmin(string id)
         {
-            if (id == null)
+            if (String.IsNullOrEmpty(id))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("ListarUtilizadoresAdmin");
             }
             User user = db.Users.Find(id);
             if (user == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("ListarUtilizadoresAdmin");
             }
             return View(user);
         }
@@ -308,12 +320,14 @@ namespace E_Recarga.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("ListarMensagens");
             }
             Mensagem mensagem = db.Mensagens.Find(id);
             if (mensagem == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("ListarMensagens");
             }
             return View(mensagem);
         }
@@ -322,12 +336,14 @@ namespace E_Recarga.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("ListarMensagens");
             }
             Mensagem mensagem = db.Mensagens.Find(id);
             if (mensagem == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("ListarMensagens");
             }
             return View(mensagem);
         }

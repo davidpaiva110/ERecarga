@@ -35,7 +35,7 @@ namespace E_Recarga.Controllers
                 ModelState.AddModelError("", "Data ou horas inválidas para efetuar reserva!");
                 error = true;
             }
-            if (Cidade.Length == 0)
+            if (String.IsNullOrEmpty(Cidade))
             {
                 ModelState.AddModelError("", "Insira a cidade pretendida!");
                 error = true;
@@ -44,8 +44,12 @@ namespace E_Recarga.Controllers
             return RedirectToAction("ListaPostosDisponiveis", new { cidade = Cidade, data = Data, horaInicio = HoraInicio, horaFim = HoraFim });
         }
 
-        public ActionResult ListaPostosDisponiveis(string cidade, DateTime data, DateTime horaInicio, DateTime horaFim)
+        public ActionResult ListaPostosDisponiveis(string cidade, DateTime? data, DateTime? horaInicio, DateTime? horaFim)
         {
+            if (data == null || horaInicio == null || horaFim == null || String.IsNullOrEmpty(cidade))
+            {
+                return RedirectToAction("PesquisarPostos");
+            }
             List<Posto> postosDisponiveis = new List<Posto>();
             List<Posto> postosToView = new List<Posto>();
             var postos = db.Postos.Include(r => r.Estacao).Include(r => r.Estacao.RedeProprietaria).Where(r => r.Estacao.Cidade.ToLower().Contains(cidade.ToLower()) && r.Estado==true);
@@ -66,10 +70,17 @@ namespace E_Recarga.Controllers
             return View(postosToView.ToList());
         }
 
-        public ActionResult ConcluirReserva(int id, DateTime data, DateTime horaInicio, DateTime horaFim)
+        public ActionResult ConcluirReserva(int? id, DateTime? data, DateTime? horaInicio, DateTime? horaFim)
         {
+            if (data == null || horaInicio == null || horaFim == null || id==null) {
+                return RedirectToAction("PesquisarPostos");
+            }
             Posto posto = db.Postos.Include(r => r.Estacao).Include(r => r.Estacao.RedeProprietaria).SingleOrDefault(r => r.PostoId == id);
-            Reserva reserva = new Reserva(id, data, horaInicio, horaFim);
+            if (posto == null)
+            {
+                return RedirectToAction("PesquisarPostos");
+            }
+            Reserva reserva = new Reserva((int)id, (DateTime)data, (DateTime)horaInicio, (DateTime)horaFim);
             ViewBag.posto = posto;
             return View(reserva);
         }
@@ -98,12 +109,14 @@ namespace E_Recarga.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("HistoricoReservas");
             }
             Reserva reserva = db.Reservas.Include(r => r.Posto).Include(r => r.Posto.Estacao).Include(r => r.Posto.Estacao.RedeProprietaria).SingleOrDefault(r => r.ReservaId == id);
             if (reserva == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("HistoricoReservas");
             }
             return View(reserva);
         }
@@ -112,12 +125,14 @@ namespace E_Recarga.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("HistoricoReservas");
             }
             Reserva reserva = db.Reservas.Include(r => r.Posto).Include(r => r.Posto.Estacao).Include(r => r.Posto.Estacao.RedeProprietaria).SingleOrDefault(r => r.ReservaId == id);
             if (reserva == null)
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return RedirectToAction("HistoricoReservas");
             }
             return View(reserva);
         }

@@ -13,6 +13,7 @@ namespace E_Recarga.Models
         [Display(Name = "Posto")]
         public  Posto posto { get; set; }
         [Display(Name = "Tempo de Utilização")]
+        [DisplayFormat(DataFormatString = "{0:#,0.##}")]
         public double temposUtilizacao { get; set; }
 
         public EstatisticasDetalhes(Estacao estacao, Posto postos, double temposUtilizacao)

@@ -263,8 +263,8 @@ namespace E_Recarga.Controllers
         {
             List<Estacao> estacoes = new List<Estacao>();
             SortedList<int, List<Estacao>> hashmap = new SortedList<int, List<Estacao>>();
-
-            var estacoesdb = db.Estacoes;
+            string redeId = User.Identity.GetUserId();
+            var estacoesdb = db.Estacoes.Where(c => c.RedeProprietariaId.Equals(redeId));
             foreach (Estacao estacao in estacoesdb)
                 estacoes.Add(estacao);
             //Ordenação com a SortedList

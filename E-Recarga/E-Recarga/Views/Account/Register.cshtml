@@ -2,22 +2,23 @@
 @{
     ViewBag.Title = "Registar";
 }
-
-
+<br />
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Registar</h1>
+        <p class="lead text-muted mb-0">Crie uma nova conta, preenchendo o formulário com os seus dados.</p>
+    </div>
+</section>
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
 
     @Html.ValidationSummary("", new { @class = "text-danger" })
-    <br />
-    <h2>@ViewBag.Title</h2>
-    <h4>Criar uma nova conta.</h4>
-    <hr />
+
 
     <div class="container">
         <div class="row">
             <div class="col">
-
                 <div class="form-group">
                     @Html.LabelFor(m => m.Nome, new { @class = "col-md-2 control-label" })
                     <div class="col-md-8">
@@ -48,9 +49,7 @@
                         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
                     </div>
                 </div>
-
             </div>
-
             <div class="col-10 col-sm-4">
                 <div class="card bg-light mb-3">
                     <div class="card-header bg-success text-white">Cartão de Crédito</div>
@@ -76,7 +75,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="row">
             <div class="col">
@@ -86,12 +84,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
 }
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

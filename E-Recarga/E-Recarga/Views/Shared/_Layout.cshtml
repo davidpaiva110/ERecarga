@@ -23,23 +23,49 @@
                         <li class="nav-item">@Html.ActionLink("Contactos", "Contact", "Home", null, new { @class = "nav-link" })</li>
                         @if (Request.IsAuthenticated && User.IsInRole("Utilizador"))
                         {
-                            <li class="nav-item">@Html.ActionLink("Reservar", "PesquisarPostos", "UserManage", null, new { @class = "nav-link" })</li>
-                            <li class="nav-item">@Html.ActionLink("Histórico", "HistoricoReservas", "UserManage", null, new { @class = "nav-link" })</li>
+                            <li class="nav-item dropdown">
+                                <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Reservar</a>
+                                <div class="dropdown-menu">
+                                    <h6 class="dropdown-header">Nova Reserva</h6>
+                                    @Html.ActionLink("Pesquisar Postos", "PesquisarPostos", "UserManage", null, new { @class = "dropdown-item" })
+                                    <div class="dropdown-divider"></div>
+                                    @Html.ActionLink("Histórico de Reservas", "HistoricoReservas", "UserManage", null, new { @class = "dropdown-item" })
+                                </div>
+                            </li>
+
                         }
                         else if (Request.IsAuthenticated && User.IsInRole("Rede Proprietaria"))
                         {
-                            <li class="nav-item">@Html.ActionLink("Estações", "ListarEstacoes", "RedeProprietariaManage", null, new { @class = "nav-link" })</li>
-                            <li class="nav-item">@Html.ActionLink("Postos", "ListarPostos", "RedeProprietariaManage", null, new { @class = "nav-link" })</li>
-                            <li class="nav-item">@Html.ActionLink("Reservas", "ListarReservas", "RedeProprietariaManage", null, new { @class = "nav-link" })</li>
-                            <li class="nav-item">@Html.ActionLink("Estatísticas", "ListarEstacoesEstatisticas", "RedeProprietariaManage", null, new { @class = "nav-link" })</li>
+                            <li class="nav-item dropdown">
+                                <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Gestão</a>
+                                <div class="dropdown-menu">
+                                    <h6 class="dropdown-header">Gestão de Estações e Postos</h6>
+                                    @Html.ActionLink("Estações", "ListarEstacoes", "RedeProprietariaManage", null, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("Postos", "ListarPostos", "RedeProprietariaManage", null, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("Estatísticas", "ListarEstacoesEstatisticas", "RedeProprietariaManage", null, new { @class = "dropdown-item" })
+                                    <div class="dropdown-divider"></div>
+                                    <h6 class="dropdown-header">Gestão de Reservas</h6>
+                                    @Html.ActionLink("Reservas", "ListarReservas", "RedeProprietariaManage", null, new { @class = "dropdown-item" })
+                                </div>
+                            </li>
                         }
                         else if (Request.IsAuthenticated && User.IsInRole("Admin"))
                         {
-                            <li class="nav-item">@Html.ActionLink("Postos Pendentes", "ListarPostosPendentes", "AdminManage", null, new { @class = "nav-link" })</li>
-                            <li class="nav-item">@Html.ActionLink("Redes Proprietárias", "ListarRedesAdmin", "AdminManage", null, new { @class = "nav-link" })</li>
-                            <li class="nav-item">@Html.ActionLink("Utilizadores", "ListarUtilizadoresAdmin", "AdminManage", null, new { @class = "nav-link" })</li>
-                            <li class="nav-item">@Html.ActionLink("Mensagens", "ListarMensagens", "AdminManage", null, new { @class = "nav-link" })</li>
-                            <li class="nav-item">@Html.ActionLink("Estatísticas", "EstatisticasAdmin", "AdminManage", null, new { @class = "nav-link" })</li>
+                            <li class="nav-item dropdown">
+                                <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Gestão</a>
+                                <div class="dropdown-menu">
+                                    <h6 class="dropdown-header">Gestão de Redes Proprietárias</h6>
+                                    @Html.ActionLink("Redes Proprietárias", "ListarRedesAdmin", "AdminManage", null, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("Postos Pendentes", "ListarPostosPendentes", "AdminManage", null, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("Estatísticas", "EstatisticasAdmin", "AdminManage", null, new { @class = "dropdown-item" })
+                                    <div class="dropdown-divider"></div>
+                                    <h6 class="dropdown-header">Gestão de Utilizadores</h6>
+                                    @Html.ActionLink("Utilizadores", "ListarUtilizadoresAdmin", "AdminManage", null, new { @class = "dropdown-item" })
+                                    <div class="dropdown-divider"></div>
+                                    <h6 class="dropdown-header">Gestão de Mensagens</h6>
+                                    @Html.ActionLink("Mensagens Recebidas", "ListarMensagens", "AdminManage", null, new { @class = "dropdown-item" })
+                                </div>
+                            </li>
                         }
                     </ul>
                     @Html.Partial("_LoginPartial")

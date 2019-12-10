@@ -9,6 +9,8 @@ using System.Net;
 using System.Web.Security;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
+using System.Web.Services;
+using System.Web.Script.Serialization;
 
 namespace E_Recarga.Controllers
 {
@@ -366,13 +368,13 @@ namespace E_Recarga.Controllers
 
             // Redes Proprietárias
             var redesdb = db.RedesProprietarias;
-            foreach(RedeProprietaria rede in redesdb)
+            foreach (RedeProprietaria rede in redesdb)
             {
                 redes.Add(rede);
                 listaReservas.Add(new List<Reserva>());
             }
             // Reservas de cada rede proprietária
-            for(int i=0; i<redes.Count; i++)
+            for (int i = 0; i < redes.Count; i++)
             {
                 string idRede = redes[i].RedeProprietariaId;
                 var reservasdb = db.Reservas.Where(r => r.Posto.Estacao.RedeProprietariaId == idRede);
@@ -382,10 +384,10 @@ namespace E_Recarga.Controllers
                 }
             }
             // Ordenar as redes propiretárias com os respetivos numeros de reserva
-            for(int i=0; i<redes.Count; i++)
+            for (int i = 0; i < redes.Count; i++)
             {
                 List<RedeProprietaria> lista = new List<RedeProprietaria>();
-                if(!hashmap.TryGetValue(listaReservas[i].Count, out lista)) // Se não existir nenhuma rede com aquele numero de 
+                if (!hashmap.TryGetValue(listaReservas[i].Count, out lista)) // Se não existir nenhuma rede com aquele numero de 
                 {
                     lista = new List<RedeProprietaria>();
                     hashmap.Add(listaReservas[i].Count, lista);
@@ -393,19 +395,28 @@ namespace E_Recarga.Controllers
                 hashmap[listaReservas[i].Count].Add(redes[i]);
             }
             List<EstatisticasAdmin> estatisticas = new List<EstatisticasAdmin>();
-            for(int i= hashmap.Count-1; i>=0; i--)
+            List<String> redesP = new List<String>();
+            List<int> nR = new List<int>();
+            for (int i = hashmap.Count - 1; i >= 0; i--)
             {
                 List<RedeProprietaria> aux;
                 aux = hashmap.Values[i];
-                foreach(RedeProprietaria rede in aux)
+                foreach (RedeProprietaria rede in aux)
                 {
                     EstatisticasAdmin e = new EstatisticasAdmin(rede, hashmap.Keys[i]);
                     estatisticas.Add(e);
+                    redesP.Add(rede.Nome);
+                    nR.Add(hashmap.Keys[i]);
                 }
             }
+
+            ViewBag.REDES = redesP;
+            ViewBag.NRESERVAS = nR;
+
             return View(estatisticas.ToList());
         }
-
-
     }
+
+       
+
 }

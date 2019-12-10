@@ -52,3 +52,31 @@
     </tbody>
 </table>
 
+<br />
+<canvas id="myChart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+        var postos = @Html.Raw(Json.Encode(ViewBag.POSTOS));
+        var tempos = @Html.Raw(Json.Encode(ViewBag.TEMPOS));
+        var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: postos,
+        datasets: [{
+            label: 'Número Total de Horas de Utilização',
+            backgroundColor: 'rgb(0, 123, 254)',
+            borderColor: 'rgb(0, 123, 254)',
+            data: tempos
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+</script>
+
+

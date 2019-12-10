@@ -284,6 +284,8 @@ namespace E_Recarga.Controllers
                 hashmap[lista.Count()].Add(estacao);
             }
             List<Estatisticas> estatisticas = new List<Estatisticas>();
+            List<int> estacaoL = new List<int>();
+            List<int> nR = new List<int>();
             for(int i= hashmap.Count-1; i >=0 ; i--)
             {
                 List<Estacao> aux;
@@ -292,9 +294,14 @@ namespace E_Recarga.Controllers
                 {
                     Estatisticas e = new Estatisticas(hashmap.Keys[i], estacao);
                     estatisticas.Add(e);
+                    estacaoL.Add(estacao.EstacaoId);
+                    nR.Add(hashmap.Keys[i]);
                 }
             }
-                return View(estatisticas.ToList());
+
+            ViewBag.ESTACOES = estacaoL;
+            ViewBag.NRESERVAS = nR;
+            return View(estatisticas.ToList());
         }
 
         public ActionResult DetalhesEstatisticas(int? id)
@@ -357,6 +364,9 @@ namespace E_Recarga.Controllers
                 hashmap[tempoUtilizacao[i]].Add(postos[i]);
             }
             List<EstatisticasDetalhes> estatisticas = new List<EstatisticasDetalhes>();
+            List<int> pLista = new List<int>();
+            List<double> temposL = new List<double>();
+            List<int> estacaoL = new List<int>();
             for (int i = hashmap.Count - 1; i >= 0; i--)
             {
                 List<Posto> aux;
@@ -365,8 +375,15 @@ namespace E_Recarga.Controllers
                 {
                     EstatisticasDetalhes e = new EstatisticasDetalhes(estacao, posto, hashmap.Keys[i]);
                     estatisticas.Add(e);
+                    pLista.Add(posto.PostoId);
+                    temposL.Add(hashmap.Keys[i]);
+                    estacaoL.Add(estacao.EstacaoId);
                 }
             }
+
+            ViewBag.POSTOS = pLista;
+            ViewBag.ESTACOES = estacaoL;
+            ViewBag.TEMPOS = temposL;
 
             return View(estatisticas.ToList());
         }

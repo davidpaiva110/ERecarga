@@ -32,23 +32,50 @@
     <tbody>
         @foreach (var estacao in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => estacao.Estacao.EstacaoId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => estacao.Estacao.Cidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => estacao.Estacao.Localizacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => estacao.numeroReservas)
-            </td>
-            <td>
-                @Html.ActionLink("Detalhes", "DetalhesEstatisticas", new { id = estacao.Estacao.EstacaoId })
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => estacao.Estacao.EstacaoId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => estacao.Estacao.Cidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => estacao.Estacao.Localizacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => estacao.numeroReservas)
+                </td>
+                <td>
+                    @Html.ActionLink("Detalhes", "DetalhesEstatisticas", new { id = estacao.Estacao.EstacaoId })
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+
+<br />
+<canvas id="myChart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+        var estacoes = @Html.Raw(Json.Encode(ViewBag.ESTACOES));
+        var nReservas = @Html.Raw(Json.Encode(ViewBag.NRESERVAS));
+        var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: estacoes,
+        datasets: [{
+            label: 'Número Total de Reservas',
+            backgroundColor: 'rgb(0, 123, 254)',
+            borderColor: 'rgb(0, 123, 254)',
+            data: nReservas
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+</script>

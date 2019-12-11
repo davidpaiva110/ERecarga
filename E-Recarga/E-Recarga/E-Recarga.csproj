@@ -190,6 +190,14 @@
     <Compile Include="Migrations\201912051751279_Tabela Mensagem.Designer.cs">
       <DependentUpon>201912051751279_Tabela Mensagem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912110319597_Modelos User e RedeProprietaria Corrigidos.cs" />
+    <Compile Include="Migrations\201912110319597_Modelos User e RedeProprietaria Corrigidos.Designer.cs">
+      <DependentUpon>201912110319597_Modelos User e RedeProprietaria Corrigidos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912110348170_ModeloFinal.cs" />
+    <Compile Include="Migrations\201912110348170_ModeloFinal.Designer.cs">
+      <DependentUpon>201912110348170_ModeloFinal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Estacao.cs" />
@@ -368,6 +376,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912051751279_Tabela Mensagem.resx">
       <DependentUpon>201912051751279_Tabela Mensagem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912110319597_Modelos User e RedeProprietaria Corrigidos.resx">
+      <DependentUpon>201912110319597_Modelos User e RedeProprietaria Corrigidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912110348170_ModeloFinal.resx">
+      <DependentUpon>201912110348170_ModeloFinal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

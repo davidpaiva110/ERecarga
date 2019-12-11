@@ -87,11 +87,13 @@ namespace E_Recarga.Models
         [Required(ErrorMessage = "O campo NIF é obrigatório!")]
         [Display(Name = "NIF")]
         [StringLength(9, ErrorMessage = "O NIF tem de ter 9 dígitos.", MinimumLength = 9)]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "O NIF tem de ter 9 dígitos")]
         public string Nif { get; set; }
 
         [Required(ErrorMessage = "O campo Número do Cartão é obrigatório!")]
         [Display(Name = "Número do Cartão")]
         [StringLength(16, ErrorMessage = "O Número do Cartão tem de ter 16 dígitos.", MinimumLength = 16)]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "O Número do CC tem de ter 16 dígitos")]
         public string NCartaoCredito { get; set; }
 
         [Required(ErrorMessage = "O campo Titular do Cartão é obrigatório!")]
@@ -101,6 +103,7 @@ namespace E_Recarga.Models
         [Required(ErrorMessage = "O campo CCV é obrigatório!")]
         [Display(Name = "CCV")]
         [StringLength(3, ErrorMessage = "O CCV tem de ter 3 dígitos.", MinimumLength = 3)]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "O CCV tem de ter 3 dígitos")]
         public string Ccv { get; set; }
 
         [Required(ErrorMessage = "O campo Tipo de Conta é obrigatório!")]

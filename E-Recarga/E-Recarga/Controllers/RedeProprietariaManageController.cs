@@ -12,7 +12,7 @@ using System.Net;
 namespace E_Recarga.Controllers
 {
     [Authorize(Roles = "Rede Proprietaria")]
-    public class RedeProprietariaManageController : Controller
+    public partial class RedeProprietariaManageController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -387,5 +387,6 @@ namespace E_Recarga.Controllers
 
             return View(estatisticas.ToList());
         }
+
     }
 }

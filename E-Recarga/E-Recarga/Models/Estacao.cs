@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace E_Recarga.Models
 {
@@ -22,7 +23,7 @@ namespace E_Recarga.Models
         public string Localizacao { get; set; }
         [Required(ErrorMessage = "Tem de especificar o preço por carregamento da estação!")]
         [Display(Name = "Preço por Carregamento")]
-        [DataType(DataType.Text)]
+        [Remote("Positivo", "RedeProprietariaManage", ErrorMessage = "O preço deve ser positivo")]
         public double Preco { get; set; }
 
         [ForeignKey("RedeProprietaria")]
@@ -41,6 +42,9 @@ namespace E_Recarga.Models
             Localizacao = localizacao;
             Preco = preco;
         }
+
+        
+    
 
     }
 }

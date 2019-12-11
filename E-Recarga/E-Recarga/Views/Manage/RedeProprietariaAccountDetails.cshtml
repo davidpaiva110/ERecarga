@@ -31,5 +31,6 @@
         <dd>@Html.DisplayFor(model => model.CCV)</dd>
     </dl>
 
-    <p>@Html.ActionLink("Gerir Conta", "Index") | @Html.ActionLink("Editar", "RedeProprietariaAccountEdit")</p>
+    <p>@Html.ActionLink("Gerir Conta", "Index", null, new { @class = "btn btn-secondary" })
+    @Html.ActionLink("Editar", "RedeProprietariaAccountEdit", null, new { @class = "btn btn-primary" })</p>
 </div>

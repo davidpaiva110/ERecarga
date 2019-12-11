@@ -72,14 +72,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Aceitar" class="btn btn-primary" />
+                <input type="submit" value="Aceitar" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Lista de Postos Pendentes", "ListarPostosPendentes")
+    @Html.ActionLink("Lista de Postos Pendentes", "ListarPostosPendentes", null, new { @class = "btn btn-primary" })
 </div>
 
 @section Scripts {

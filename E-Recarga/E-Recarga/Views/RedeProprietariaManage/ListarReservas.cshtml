@@ -10,51 +10,72 @@
         <p class="lead text-muted mb-0">Lista de reservas da Rede Proprietária.</p>
     </div>
 </section>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ReservaId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PostoId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Data)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HoraInicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HoraFim)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var reserva in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => reserva.ReservaId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => reserva.PostoId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => reserva.Data)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => reserva.HoraInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => reserva.HoraFim)
-            </td>
-            <td>
-                @Html.ActionLink("Detalhes", "DetalhesReserva", new { id = reserva.ReservaId })
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+@using (Html.BeginForm("ListarReservas", "RedeProprietariaManage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <p>Pesquise na tabela por uma data específica:</p>
+    <div class="input-group col-md-6">
+        <input class="form-control" type="text" placeholder="Pesquisar [mm-dd-aaaa] .." name="pesquisa" value="@ViewBag.pesquisa">
+        <span class="input-group-btn">
+            <input type="submit" value="Pesquisar" class="btn btn-outline-primary" />
+        </span>
+    </div>
+    <br />
+}
+@if (Model.Count() <= 0)
+{
+    <div class="container">
+        <h6 class="font-weight-bold">Sem Reservas.</h6>
+    </div>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReservaId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PostoId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Data)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HoraInicio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HoraFim)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reserva in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => reserva.ReservaId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => reserva.PostoId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => reserva.Data)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => reserva.HoraInicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => reserva.HoraFim)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Detalhes", "DetalhesReserva", new { id = reserva.ReservaId }, new { @class = "btn btn-info" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

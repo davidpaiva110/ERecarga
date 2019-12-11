@@ -10,42 +10,63 @@
         <p class="lead text-muted mb-0">Lista de dúvidas ou sugestões recebidas através da página de Contactos</p>
     </div>
 </section>
-
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.MensagemId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+@using (Html.BeginForm("ListarMensagens", "AdminManage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <p>Pesquise na tabela por um email:</p>
+    <div class="input-group col-md-6">
+        <input class="form-control" type="text" placeholder="Pesquisar.." name="pesquisa" value="@ViewBag.pesquisa">
+        <span class="input-group-btn">
+            <input type="submit" value="Pesquisar" class="btn btn-outline-primary" />
+        </span>
+    </div>
+    <br />
+}
+@if (Model.Count() <= 0)
+{
+    <div class="container">
+        <h6 class="font-weight-bold">Sem mensagens.</h6>
+    </div>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MensagemId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.ActionLink("Detalhes", "DetalhesMensagem", new { id = item.MensagemId }) |
-                    @Html.ActionLink("Remover", "RemoverMensagem", new { id = item.MensagemId })
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.MensagemId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MensagemId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Detalhes", "DetalhesMensagem", new { id = item.MensagemId }, new { @class = "btn btn-info" })
+                        @Html.ActionLink("Remover", "RemoverMensagem", new { id = item.MensagemId }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
 
+}

@@ -49,7 +49,7 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Editar", "EditarEstacao", new { id = Model.EstacaoId }) |
-    @Html.ActionLink("Lista das Estações", "ListarEstacoes")
+    @Html.ActionLink("Editar", "EditarEstacao", new { id = Model.EstacaoId }, new { @class = "btn btn-primary" }) 
+    @Html.ActionLink("Lista das Estações", "ListarEstacoes", null, new { @class = "btn btn-info" })
 </p>
 

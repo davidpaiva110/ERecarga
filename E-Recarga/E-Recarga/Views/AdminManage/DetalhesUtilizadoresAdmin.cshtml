@@ -35,58 +35,71 @@
 
 <br />
 <h4>Reservas do Utilizador @ViewBag.user.Nome</h4>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ReservaId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Data)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HoraInicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HoraFim)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Posto)
-            </th>
-            <th>
-                Estação
-            </th>
-            <th>
-               Rede Proprietária
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var estacao in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => estacao.ReservaId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => estacao.Data)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => estacao.HoraInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => estacao.HoraFim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => estacao.Posto.PostoId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => estacao.Posto.Estacao.Localizacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => estacao.Posto.Estacao.RedeProprietaria.Nome)
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+@if (Model.Count() <= 0)
+{
+    <div class="container">
+        <h6 class="font-weight-bold">Sem reservas.</h6>
+    </div>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReservaId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Data)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HoraInicio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HoraFim)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Posto)
+                </th>
+                <th>
+                    Estação
+                </th>
+                <th>
+                    Rede Proprietária
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var estacao in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.ReservaId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.Data)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.HoraInicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.HoraFim)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.Posto.PostoId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.Posto.Estacao.Localizacao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.Posto.Estacao.RedeProprietaria.Nome)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+    <br />
+    <p>
+        @Html.ActionLink("Lista de Utilizadores", "ListarUtilizadoresAdmin", null, new { @class = "btn btn-primary" })
+    </p>

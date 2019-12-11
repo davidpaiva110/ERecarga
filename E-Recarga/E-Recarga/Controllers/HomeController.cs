@@ -30,6 +30,7 @@ namespace E_Recarga.Controllers
                 if (postosAtivos.Count() > 0)
                     estacoesComPostosAtivos.Add(est);
             }
+            ViewBag.pesquisa = "";
             return View(estacoesComPostosAtivos);
         }
 
@@ -49,6 +50,28 @@ namespace E_Recarga.Controllers
                 return RedirectToAction("Contact");
             }
             return View(mensagem);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult About(string pesquisa)
+        {
+            List<Estacao> estacoesComPostosAtivos = new List<Estacao>();
+            List<Estacao> allEstacoes = new List<Estacao>();
+            var estacoes = db.Estacoes.Include(v => v.RedeProprietaria).Where(v => v.RedeProprietaria.Nome.ToLower().Contains(pesquisa.ToLower()) || v.Cidade.ToLower().Contains(pesquisa.ToLower()) || v.Localizacao.ToLower().Contains(pesquisa.ToLower()));
+            if (String.IsNullOrEmpty(pesquisa))
+            {
+                estacoes = db.Estacoes.Include(v => v.RedeProprietaria);
+            }
+            foreach (Estacao est in estacoes) allEstacoes.Add(est);
+            foreach (Estacao est in allEstacoes)
+            {
+                var postosAtivos = db.Postos.Where(c => c.EstacaoId == est.EstacaoId && c.Estado == false);
+                if (postosAtivos.Count() > 0)
+                    estacoesComPostosAtivos.Add(est);
+            }
+            ViewBag.pesquisa = pesquisa;
+            return View(estacoesComPostosAtivos);
         }
     }
 }

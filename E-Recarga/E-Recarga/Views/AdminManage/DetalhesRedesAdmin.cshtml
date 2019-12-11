@@ -36,40 +36,53 @@
 
 <br />
 <h4>Estações da Rede @ViewBag.rede.Nome</h4>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.EstacaoId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Localizacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Preco)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var estacao in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => estacao.EstacaoId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => estacao.Cidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => estacao.Localizacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => estacao.Preco)€
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+@if (Model.Count() <= 0)
+{
+    <div class="container">
+        <h6 class="font-weight-bold">Sem estações.</h6>
+    </div>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.EstacaoId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cidade)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Localizacao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Preco)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var estacao in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.EstacaoId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.Cidade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.Localizacao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.Preco)€
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<br />
+    <p>
+        @Html.ActionLink("Lista de Redes Proprietárias", "ListarRedesAdmin", null, new { @class = "btn btn-primary" })
+    </p>

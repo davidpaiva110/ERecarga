@@ -26,7 +26,7 @@ namespace E_Recarga.Controllers
             foreach (Estacao est in estacoes) allEstacoes.Add(est);
             foreach (Estacao est in allEstacoes)
             {
-                var postosAtivos = db.Postos.Where(c => c.EstacaoId == est.EstacaoId && c.Estado == false);
+                var postosAtivos = db.Postos.Where(c => c.EstacaoId == est.EstacaoId && c.Estado == true);
                 if (postosAtivos.Count() > 0)
                     estacoesComPostosAtivos.Add(est);
             }
@@ -66,7 +66,7 @@ namespace E_Recarga.Controllers
             foreach (Estacao est in estacoes) allEstacoes.Add(est);
             foreach (Estacao est in allEstacoes)
             {
-                var postosAtivos = db.Postos.Where(c => c.EstacaoId == est.EstacaoId && c.Estado == false);
+                var postosAtivos = db.Postos.Where(c => c.EstacaoId == est.EstacaoId && c.Estado == true);
                 if (postosAtivos.Count() > 0)
                     estacoesComPostosAtivos.Add(est);
             }

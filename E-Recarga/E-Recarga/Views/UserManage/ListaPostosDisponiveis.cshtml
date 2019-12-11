@@ -9,44 +9,54 @@
         <p class="lead text-muted mb-0">Selecione um dos postos disponíveis para efetuar a sua reserva!</p>
     </div>
 </section>
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.PostoId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estacao.RedeProprietaria.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estacao.Cidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estacao.Localizacao)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+@if (Model.Count() <= 0)
+{
+    <div class="container">
+        <h6 class="font-weight-bold">Sem postos disponíveis.</h6>
+    </div>
+}
+else
+{
+
+    <table class="table table-hover">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PostoId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Estacao.RedeProprietaria.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Estacao.Cidade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Estacao.Localizacao)
-                </td>
-                <td>
-                    @Html.ActionLink("Reservar", "ConcluirReserva", new { id = item.PostoId, data = ViewBag.data, horaInicio = ViewBag.horaInicio, horaFim = ViewBag.horaFim}, new { @class = "btn btn-primary" })
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.PostoId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estacao.RedeProprietaria.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estacao.Cidade)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estacao.Localizacao)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PostoId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estacao.RedeProprietaria.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estacao.Cidade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estacao.Localizacao)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Reservar", "ConcluirReserva", new { id = item.PostoId, data = ViewBag.data, horaInicio = ViewBag.horaInicio, horaFim = ViewBag.horaFim }, new { @class = "btn btn-primary" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

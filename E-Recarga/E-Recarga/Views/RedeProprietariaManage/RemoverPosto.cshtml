@@ -66,10 +66,13 @@
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-actions no-color">
-            <input type="submit" value="Remover" class="btn btn-danger" /> |
-            @Html.ActionLink("Lista de Postos", "ListarPostos")
+            <input type="submit" value="Remover" class="btn btn-danger" /> 
         </div>
     }
+</div>
+<br />
+<div>
+    @Html.ActionLink("Lista de Postos", "ListarPostos", null, new { @class = "btn btn-info" })
 </div>
 
 

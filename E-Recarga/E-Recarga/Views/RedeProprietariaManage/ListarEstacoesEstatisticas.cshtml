@@ -11,52 +11,73 @@
     </div>
 </section>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Estacao.EstacaoId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estacao.Cidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estacao.Localizacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.numeroReservas)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var estacao in Model)
-        {
+@using (Html.BeginForm("ListarEstacoesEstatisticas", "RedeProprietariaManage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <p>Pesquise na tabela por alguma Cidade ou Localização:</p>
+    <div class="input-group col-md-6">
+        <input class="form-control" type="text" placeholder="Pesquisar.." name="pesquisa" value="@ViewBag.pesquisa">
+        <span class="input-group-btn">
+            <input type="submit" value="Pesquisar" class="btn btn-outline-primary" />
+        </span>
+    </div>
+    <br />
+}
+@if (Model.Count() <= 0)
+{
+    <div class="container">
+        <h6 class="font-weight-bold">Sem estatísticas.</h6>
+    </div>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => estacao.Estacao.EstacaoId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => estacao.Estacao.Cidade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => estacao.Estacao.Localizacao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => estacao.numeroReservas)
-                </td>
-                <td>
-                    @Html.ActionLink("Detalhes", "DetalhesEstatisticas", new { id = estacao.Estacao.EstacaoId })
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estacao.EstacaoId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estacao.Cidade)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estacao.Localizacao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.numeroReservas)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var estacao in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.Estacao.EstacaoId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.Estacao.Cidade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.Estacao.Localizacao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.numeroReservas)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Detalhes", "DetalhesEstatisticas", new { id = estacao.Estacao.EstacaoId }, new { @class = "btn btn-info" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-<br />
-<canvas id="myChart"></canvas>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script>
+    <br />
+    <canvas id="myChart"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script>
         var estacoes = @Html.Raw(Json.Encode(ViewBag.ESTACOES));
         var nReservas = @Html.Raw(Json.Encode(ViewBag.NRESERVAS));
         var ctx = document.getElementById('myChart').getContext('2d');
@@ -78,4 +99,6 @@ var chart = new Chart(ctx, {
     // Configuration options go here
     options: {}
 });
-</script>
+    </script>
+}
+

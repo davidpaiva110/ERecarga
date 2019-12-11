@@ -12,43 +12,64 @@
 </section>
 
 <p>
-    @Html.ActionLink("Nova Estação", "NovaEstacao")
+    @Html.ActionLink("Nova Estação", "NovaEstacao", null, new { @class = "btn btn-primary" })
 </p>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.EstacaoId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Localizacao)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var estacao in Model)
-        {
+@using (Html.BeginForm("ListarEstacoes", "RedeProprietariaManage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <p>Pesquise na tabela por alguma Cidade ou Localização:</p>
+    <div class="input-group col-md-6">
+        <input class="form-control" type="text" placeholder="Pesquisar.." name="pesquisa" value="@ViewBag.pesquisa">
+        <span class="input-group-btn">
+            <input type="submit" value="Pesquisar" class="btn btn-outline-primary" />
+        </span>
+    </div>
+    <br />
+}
+@if (Model.Count() <= 0)
+{
+    <div class="container">
+        <h6 class="font-weight-bold">Sem estações.</h6>
+    </div>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => estacao.EstacaoId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => estacao.Cidade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => estacao.Localizacao)
-                </td>
-                <td>
-                    @Html.ActionLink("Editar", "EditarEstacao", new { id = estacao.EstacaoId }) |
-                    @Html.ActionLink("Detalhes", "DetalhesEstacao", new { id = estacao.EstacaoId }) |
-                    @Html.ActionLink("Remover", "RemoverEstacao", new { id = estacao.EstacaoId })
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.EstacaoId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cidade)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Localizacao)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var estacao in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.EstacaoId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.Cidade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.Localizacao)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "EditarEstacao", new { id = estacao.EstacaoId }, new { @class = "btn btn-primary" }) 
+                        @Html.ActionLink("Detalhes", "DetalhesEstacao", new { id = estacao.EstacaoId }, new { @class = "btn btn-info" }) 
+                        @Html.ActionLink("Remover", "RemoverEstacao", new { id = estacao.EstacaoId }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

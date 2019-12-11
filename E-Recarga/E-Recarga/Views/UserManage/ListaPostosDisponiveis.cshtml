@@ -44,7 +44,7 @@
                     @Html.DisplayFor(modelItem => item.Estacao.Localizacao)
                 </td>
                 <td>
-                    @Html.ActionLink("Reservar", "ConcluirReserva", new { id = item.PostoId, data = ViewBag.data, horaInicio = ViewBag.horaInicio, horaFim = ViewBag.horaFim})
+                    @Html.ActionLink("Reservar", "ConcluirReserva", new { id = item.PostoId, data = ViewBag.data, horaInicio = ViewBag.horaInicio, horaFim = ViewBag.horaFim}, new { @class = "btn btn-primary" })
                 </td>
             </tr>
         }

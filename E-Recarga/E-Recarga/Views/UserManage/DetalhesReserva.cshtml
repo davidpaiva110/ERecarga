@@ -10,6 +10,7 @@
 </section>
 
 <div>
+
     <hr />
     <dl class="dl-horizontal">
         <dt>@Html.DisplayNameFor(model => model.ReservaId)</dt>
@@ -39,8 +40,8 @@
         <dt>@Html.DisplayNameFor(model => model.HoraFim)</dt>
         <dd>@Html.DisplayFor(model => model.HoraFim)</dd>
     </dl>
+    <p>@Html.ActionLink("Histórico de Reservas", "HistoricoReservas", null, new { @class = "btn btn-primary" })</p>
 
-    <p>@Html.ActionLink("Histórico de Reservas", "HistoricoReservas")</p>
 </div>
 
 @section Scripts {

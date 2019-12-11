@@ -10,36 +10,56 @@
         <p class="lead text-muted mb-0">Lista de redes proprietária ordenadas por ordem decrescente do número de reservas.</p>
     </div>
 </section>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.RedeProprietaria)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumeroReservas)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var estacao in Model)
-        {
+@using (Html.BeginForm("EstatisticasAdmin", "AdminManage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <p>Pesquise na tabela por uma Rede Proprietária:</p>
+    <div class="input-group col-md-6">
+        <input class="form-control" type="text" placeholder="Pesquisar.." name="pesquisa" value="@ViewBag.pesquisa">
+        <span class="input-group-btn">
+            <input type="submit" value="Pesquisar" class="btn btn-outline-primary" />
+        </span>
+    </div>
+    <br />
+}
+@if (Model.Count() <= 0)
+{
+    <div class="container">
+        <h6 class="font-weight-bold">Sem estatísticas.</h6>
+    </div>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => estacao.RedeProprietaria.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => estacao.NumeroReservas)
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.RedeProprietaria)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumeroReservas)
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var estacao in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.RedeProprietaria.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.NumeroReservas)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
 
-<br />
-<canvas id="myChart"></canvas>
+    <br />
+    <canvas id="myChart"></canvas>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script>
         var redes = @Html.Raw(Json.Encode(ViewBag.REDES));
@@ -64,4 +84,4 @@ var chart = new Chart(ctx, {
     options: {}
 });
     </script>
-
+}

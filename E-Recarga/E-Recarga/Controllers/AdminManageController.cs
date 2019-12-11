@@ -24,6 +24,7 @@ namespace E_Recarga.Controllers
         public ActionResult ListarPostosPendentes()
         {
             List<Posto> postosPendentes = new List<Posto>();
+            ViewBag.pesquisa = "";
             var postos = db.Postos.Include(p => p.Estacao).Include(p => p.Estacao.RedeProprietaria).Where(p => p.Estado.Equals(false));
             foreach (Posto posto in postos)
                 postosPendentes.Add(posto);
@@ -90,6 +91,7 @@ namespace E_Recarga.Controllers
         public ActionResult ListarRedesAdmin()
         {
             List<RedeProprietaria> redes = new List<RedeProprietaria>();
+            ViewBag.pesquisa = "";
             var redesdb = db.RedesProprietarias.Include(r => r.Estacoes);
             foreach (RedeProprietaria est in redesdb)
                 redes.Add(est);
@@ -223,7 +225,8 @@ namespace E_Recarga.Controllers
         public ActionResult ListarUtilizadoresAdmin()
         {
             var usersdb = db.Users;
-            List<User> utilizadores = new List<User>();
+            ViewBag.pesquisa = "";
+            List <User> utilizadores = new List<User>();
             foreach (User user in usersdb)
                 utilizadores.Add(user);
             return View(utilizadores.ToList());
@@ -314,6 +317,7 @@ namespace E_Recarga.Controllers
 
         public ActionResult ListarMensagens()
         {
+            ViewBag.pesquisa = "";
             var mensagens = db.Mensagens.OrderByDescending(c => c.MensagemId);
             return View(mensagens.ToList());
         }
@@ -362,6 +366,7 @@ namespace E_Recarga.Controllers
 
         public ActionResult EstatisticasAdmin()
         {
+            ViewBag.pesquisa = "";
             SortedList<int, List<RedeProprietaria>> hashmap = new SortedList<int, List<RedeProprietaria>>();
             List<RedeProprietaria> redes = new List<RedeProprietaria>();
             List<List<Reserva>> listaReservas = new List<List<Reserva>>();
@@ -415,8 +420,119 @@ namespace E_Recarga.Controllers
 
             return View(estatisticas.ToList());
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ListarRedesAdmin(string pesquisa)
+        {
+            List<RedeProprietaria> redes = new List<RedeProprietaria>();
+            ViewBag.pesquisa = pesquisa;
+            var redesdb = db.RedesProprietarias.Include(r => r.Estacoes).Where(r=>r.Nome.ToLower().Contains(pesquisa.ToLower()));
+            if (String.IsNullOrEmpty(pesquisa))
+                redesdb = db.RedesProprietarias.Include(r => r.Estacoes);
+            foreach (RedeProprietaria est in redesdb)
+                redes.Add(est);
+            return View(redes.ToList());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ListarPostosPendentes(string pesquisa)
+        {
+            List<Posto> postosPendentes = new List<Posto>();
+            ViewBag.pesquisa = pesquisa;
+            var postos = db.Postos.Include(p => p.Estacao).Include(p => p.Estacao.RedeProprietaria).Where(p => p.Estado.Equals(false) && (p.Estacao.Cidade.ToLower().Contains(pesquisa.ToLower()) || p.Estacao.Localizacao.ToLower().Contains(pesquisa.ToLower()) || p.Estacao.RedeProprietaria.Nome.ToLower().Contains(pesquisa.ToLower())));
+            if (String.IsNullOrEmpty(pesquisa))
+                postos = db.Postos.Include(p => p.Estacao).Include(p => p.Estacao.RedeProprietaria).Where(p => p.Estado.Equals(false));
+            foreach (Posto posto in postos)
+                postosPendentes.Add(posto);
+            return View(postosPendentes.ToList());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EstatisticasAdmin(string pesquisa)
+        {
+            ViewBag.pesquisa = pesquisa;
+            SortedList<int, List<RedeProprietaria>> hashmap = new SortedList<int, List<RedeProprietaria>>();
+            List<RedeProprietaria> redes = new List<RedeProprietaria>();
+            List<List<Reserva>> listaReservas = new List<List<Reserva>>();
+
+            // Redes Proprietárias
+            var redesdb = db.RedesProprietarias.Where(v=>v.Nome.ToLower().Contains(pesquisa.ToLower()));
+            if (String.IsNullOrEmpty(pesquisa))
+                redesdb = db.RedesProprietarias;
+            foreach (RedeProprietaria rede in redesdb)
+            {
+                redes.Add(rede);
+                listaReservas.Add(new List<Reserva>());
+            }
+            // Reservas de cada rede proprietária
+            for (int i = 0; i < redes.Count; i++)
+            {
+                string idRede = redes[i].RedeProprietariaId;
+                var reservasdb = db.Reservas.Where(r => r.Posto.Estacao.RedeProprietariaId == idRede);
+                foreach (Reserva r in reservasdb)
+                {
+                    listaReservas[i].Add(r);
+                }
+            }
+            // Ordenar as redes propiretárias com os respetivos numeros de reserva
+            for (int i = 0; i < redes.Count; i++)
+            {
+                List<RedeProprietaria> lista = new List<RedeProprietaria>();
+                if (!hashmap.TryGetValue(listaReservas[i].Count, out lista)) // Se não existir nenhuma rede com aquele numero de 
+                {
+                    lista = new List<RedeProprietaria>();
+                    hashmap.Add(listaReservas[i].Count, lista);
+                }
+                hashmap[listaReservas[i].Count].Add(redes[i]);
+            }
+            List<EstatisticasAdmin> estatisticas = new List<EstatisticasAdmin>();
+            List<String> redesP = new List<String>();
+            List<int> nR = new List<int>();
+            for (int i = hashmap.Count - 1; i >= 0; i--)
+            {
+                List<RedeProprietaria> aux;
+                aux = hashmap.Values[i];
+                foreach (RedeProprietaria rede in aux)
+                {
+                    EstatisticasAdmin e = new EstatisticasAdmin(rede, hashmap.Keys[i]);
+                    estatisticas.Add(e);
+                    redesP.Add(rede.Nome);
+                    nR.Add(hashmap.Keys[i]);
+                }
+            }
+
+            ViewBag.REDES = redesP;
+            ViewBag.NRESERVAS = nR;
+
+            return View(estatisticas.ToList());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ListarUtilizadoresAdmin(string pesquisa)
+        {
+            var usersdb = db.Users.Where(v=>v.Nome.ToLower().Contains(pesquisa.ToLower()));
+            if (String.IsNullOrEmpty(pesquisa))
+                usersdb = db.Users;
+            ViewBag.pesquisa = pesquisa;
+            List<User> utilizadores = new List<User>();
+            foreach (User user in usersdb)
+                utilizadores.Add(user);
+            return View(utilizadores.ToList());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ListarMensagens(string pesquisa)
+        {
+            ViewBag.pesquisa = pesquisa;
+            if (String.IsNullOrEmpty(pesquisa))
+                return View(db.Mensagens.OrderByDescending(c => c.MensagemId).ToList());
+            else
+                return View(db.Mensagens.Where(v=>v.Email.Contains(pesquisa)).OrderByDescending(c => c.MensagemId).ToList());
+        }
     }
-
-       
-
 }

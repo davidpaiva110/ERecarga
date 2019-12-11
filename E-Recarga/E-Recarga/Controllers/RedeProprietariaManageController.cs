@@ -20,12 +20,14 @@ namespace E_Recarga.Controllers
         {
             string userId = User.Identity.GetUserId();
             var postos = db.Postos.Include(r => r.Estacao).Where(r=>r.Estacao.RedeProprietariaId.Contains(userId));
+            ViewBag.pesquisa = "";
             return View(postos.ToList());
         }
 
         public ActionResult ListarEstacoes()
         {
             string userId = User.Identity.GetUserId();
+            ViewBag.pesquisa = "";
             return View(db.Estacoes.Where(c => c.RedeProprietariaId.Contains(userId)).ToList());
         }
 
@@ -236,6 +238,7 @@ namespace E_Recarga.Controllers
         public ActionResult ListarReservas()
         {
             List<Reserva> reservas = new List<Reserva>();
+            ViewBag.pesquisa = "";
             string userId = User.Identity.GetUserId();
             var reservasdb = db.Reservas.Include(r => r.Posto.Estacao.RedeProprietaria).Where(r => r.Posto.Estacao.RedeProprietariaId == userId);
             foreach(Reserva reserva in reservasdb)
@@ -261,7 +264,8 @@ namespace E_Recarga.Controllers
 
         public ActionResult ListarEstacoesEstatisticas()
         {
-            List<Estacao> estacoes = new List<Estacao>();
+            ViewBag.pesquisa = "";
+            List <Estacao> estacoes = new List<Estacao>();
             SortedList<int, List<Estacao>> hashmap = new SortedList<int, List<Estacao>>();
             string redeId = User.Identity.GetUserId();
             var estacoesdb = db.Estacoes.Where(c => c.RedeProprietariaId.Equals(redeId));
@@ -388,5 +392,101 @@ namespace E_Recarga.Controllers
             return View(estatisticas.ToList());
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ListarEstacoes(string pesquisa)
+        {
+            string userId = User.Identity.GetUserId();
+            ViewBag.pesquisa = pesquisa;
+            if(String.IsNullOrEmpty(pesquisa))
+                return View(db.Estacoes.Where(c => c.RedeProprietariaId.Contains(userId)).ToList());
+            else
+                return View(db.Estacoes.Where(c => c.RedeProprietariaId.Contains(userId) && (c.Cidade.ToLower().Contains(pesquisa.ToLower()) || c.Localizacao.ToLower().Contains(pesquisa.ToLower()))).ToList());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ListarPostos(string pesquisa)
+        {
+            string userId = User.Identity.GetUserId();
+            ViewBag.pesquisa = pesquisa;
+            if (String.IsNullOrEmpty(pesquisa))
+                return View(db.Postos.Include(r => r.Estacao).Where(r => r.Estacao.RedeProprietariaId.Contains(userId)).ToList());
+            else
+                return View(db.Postos.Include(r => r.Estacao).Where(r => r.Estacao.RedeProprietariaId.Contains(userId) && (r.Estacao.Cidade.ToLower().Contains(pesquisa.ToLower()) || r.Estacao.Localizacao.ToLower().Contains(pesquisa.ToLower()))).ToList());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ListarEstacoesEstatisticas(string pesquisa)
+        {
+            string userId = User.Identity.GetUserId();
+            ViewBag.pesquisa = pesquisa;
+            List<Estacao> estacoes = new List<Estacao>();
+            SortedList<int, List<Estacao>> hashmap = new SortedList<int, List<Estacao>>();
+            string redeId = User.Identity.GetUserId();
+            var estacoesdb = db.Estacoes.Where(c => c.RedeProprietariaId.Equals(redeId) && (c.Cidade.ToLower().Contains(pesquisa.ToLower()) || c.Localizacao.ToLower().Contains(pesquisa.ToLower())));
+            if (String.IsNullOrEmpty(pesquisa))
+                estacoesdb = db.Estacoes.Where(c => c.RedeProprietariaId.Equals(redeId));
+            foreach (Estacao estacao in estacoesdb)
+                estacoes.Add(estacao);
+            //Ordenação com a SortedList
+            foreach (Estacao estacao in estacoes)
+            {
+                List<Reserva> lista = new List<Reserva>();
+                List<Estacao> listaEstacao = new List<Estacao>();
+                var reservasdb = db.Reservas.Where(r => r.Posto.EstacaoId == estacao.EstacaoId);
+                foreach (Reserva r in reservasdb)
+                    lista.Add(r);
+                //Ver se já existe alguma estação com o mesmo numero de reservas
+                if (!hashmap.TryGetValue(lista.Count(), out listaEstacao))
+                {
+                    listaEstacao = new List<Estacao>();
+                    hashmap.Add(lista.Count(), listaEstacao);
+                }
+                hashmap[lista.Count()].Add(estacao);
+            }
+            List<Estatisticas> estatisticas = new List<Estatisticas>();
+            List<int> estacaoL = new List<int>();
+            List<int> nR = new List<int>();
+            for (int i = hashmap.Count - 1; i >= 0; i--)
+            {
+                List<Estacao> aux;
+                aux = hashmap.Values[i];
+                foreach (Estacao estacao in aux)
+                {
+                    Estatisticas e = new Estatisticas(hashmap.Keys[i], estacao);
+                    estatisticas.Add(e);
+                    estacaoL.Add(estacao.EstacaoId);
+                    nR.Add(hashmap.Keys[i]);
+                }
+            }
+
+            ViewBag.ESTACOES = estacaoL;
+            ViewBag.NRESERVAS = nR;
+            return View(estatisticas.ToList());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ListarReservas(string pesquisa)
+        {
+            List<Reserva> reservas = new List<Reserva>();
+            string userId = User.Identity.GetUserId();
+            if (!String.IsNullOrEmpty(pesquisa) && DateTime.TryParse(pesquisa, out DateTime data) == true)
+            {
+                ViewBag.pesquisa = pesquisa;
+                var reservasdb = db.Reservas.Include(r => r.Posto.Estacao.RedeProprietaria).Where(r => r.Posto.Estacao.RedeProprietariaId == userId && r.Data==data);
+                foreach (Reserva reserva in reservasdb)
+                    reservas.Add(reserva);
+                return View(reservas.ToList());
+            }
+            else {
+                var reservasdb = db.Reservas.Include(r => r.Posto.Estacao.RedeProprietaria).Where(r => r.Posto.Estacao.RedeProprietariaId == userId);
+                foreach (Reserva reserva in reservasdb)
+                    reservas.Add(reserva);
+                return View(reservas.ToList());
+            }
+        }
     }
 }

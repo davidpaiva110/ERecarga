@@ -11,51 +11,58 @@
         <p class="lead text-muted mb-0">Informação relativa a uma estação e o tempo de utilização de cada posto.</p>
     </div>
 </section>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.posto.PostoId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estacao.Cidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estacao.Localizacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.temposUtilizacao)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var estacao in Model)
-        {
+@if (Model.Count() <= 0)
+{
+    <div class="container">
+        <h6 class="font-weight-bold">Sem estatísticas.</h6>
+    </div>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => estacao.posto.PostoId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => estacao.Estacao.Cidade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => estacao.Estacao.Localizacao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => estacao.temposUtilizacao) h
-                </td>
-                <td> </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.posto.PostoId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estacao.Cidade)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estacao.Localizacao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.temposUtilizacao)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var estacao in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.posto.PostoId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.Estacao.Cidade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.Estacao.Localizacao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => estacao.temposUtilizacao) h
+                    </td>
+                    <td> </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-<br />
-<canvas id="myChart"></canvas>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script>
+    <br />
+    <canvas id="myChart"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script>
         var postos = @Html.Raw(Json.Encode(ViewBag.POSTOS));
         var tempos = @Html.Raw(Json.Encode(ViewBag.TEMPOS));
         var ctx = document.getElementById('myChart').getContext('2d');
@@ -77,6 +84,7 @@ var chart = new Chart(ctx, {
     // Configuration options go here
     options: {}
 });
-</script>
+    </script>
 
 
+}

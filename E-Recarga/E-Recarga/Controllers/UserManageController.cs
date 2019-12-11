@@ -102,6 +102,7 @@ namespace E_Recarga.Controllers
         public ActionResult HistoricoReservas()
         {
             string userId = User.Identity.GetUserId();
+            ViewBag.pesquisa = "";
             return View(db.Reservas.Include(c => c.Posto).Include(c => c.Posto.Estacao).Where(c => c.UserId.Contains(userId)).OrderByDescending(c=>c.UserId).ToList());
         }
 
@@ -145,6 +146,18 @@ namespace E_Recarga.Controllers
             db.Reservas.Remove(reserva);
             db.SaveChanges();
             return RedirectToAction("HistoricoReservas");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult HistoricoReservas(string pesquisa)
+        {
+            string userId = User.Identity.GetUserId();
+            ViewBag.pesquisa = pesquisa;
+            if(String.IsNullOrEmpty(pesquisa))
+                return View(db.Reservas.Include(c => c.Posto).Include(c => c.Posto.Estacao).Where(c => c.UserId.Contains(userId)).OrderByDescending(c => c.UserId).ToList());
+            else
+                return View(db.Reservas.Include(c => c.Posto).Include(c => c.Posto.Estacao).Where(c => c.UserId.Contains(userId) && (c.Posto.Estacao.Cidade.ToLower().Contains(pesquisa.ToLower()) || c.Posto.Estacao.Localizacao.ToLower().Contains(pesquisa.ToLower()))).OrderByDescending(c => c.UserId).ToList());
         }
     }
 }

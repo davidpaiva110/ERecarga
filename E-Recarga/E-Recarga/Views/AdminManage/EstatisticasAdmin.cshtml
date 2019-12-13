@@ -76,12 +76,23 @@ var chart = new Chart(ctx, {
             label: 'Número Total de Reservas',
             backgroundColor: 'rgb(0, 123, 254)',
             borderColor: 'rgb(0, 123, 254)',
+            barThickness: 'flex',
             data: nReservas
         }]
     },
 
     // Configuration options go here
-    options: {}
+    options: {
+        scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true  // Barras começarem a zexo
+                    }
+                }],
+                xAxes: [{
+                    barPercentage: 0.5  // Largura das barras
+                }]
+        }}
 });
     </script>
 }

@@ -7,3 +7,6 @@ Technologies Used:
 - ASP.Net
 - C#
 - SQL Server
+- HTML
+- Bootstrap
+- Javasctipt

@@ -9,4 +9,4 @@ Technologies Used:
 - SQL Server
 - HTML
 - Bootstrap
-- Javasctipt
+- Javascript
